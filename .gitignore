@@ -1,0 +1,49 @@
+# NetBeans specific
+nbproject/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+*.logs
+*.ctxt
+
+# IDE
+.idea/
+*.iml
+*.iws
+.settings/
+.classpath
+.project
+
+# OS specific
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Logs
+*.log
+log/
+logs/
+
+# Database
+*.db
+*.sqlite
