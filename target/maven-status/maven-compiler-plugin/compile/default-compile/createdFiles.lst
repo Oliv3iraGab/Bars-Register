@@ -3,6 +3,7 @@ br\com\bars_register\Bars_Register.class
 br\com\bars_register\persistence\Venda.class
 br\com\bars_register\persistence\Fornecedor.class
 br\com\bars_register\persistence\Produto.class
+br\com\bars_register\persistence\Relatorio.class
 br\com\bars_register\persistence\Gerente.class
 br\com\bars_register\persistence\Usuario.class
 br\com\bars_register\persistence\Funcionario.class
