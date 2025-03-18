@@ -35,5 +35,13 @@
             <version>1.18.30</version>
             <scope>provided</scope>
         </dependency>
+
+        <!-- FlatLaf -->
+        <dependency>
+            <groupId>com.formdev</groupId>
+            <artifactId>flatlaf</artifactId>
+            <version>3.5.4</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 </project>
