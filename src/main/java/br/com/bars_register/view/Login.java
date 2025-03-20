@@ -18,20 +18,24 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
-        
+        String path = "/images/Logo-Bars.png";
+        int w = 119;
+        int h = 160;
+        carregarLogo(path, w, h);
+    }
+
+    public void carregarLogo(String path, int w, int h) {
         try {
-            String path = "/images/Logo-Bars.png";
             java.net.URL imageURL = getClass().getResource(path);
             if (imageURL != null) {
                 ImageIcon icon = new ImageIcon(imageURL);
-                Image img = icon.getImage().getScaledInstance(119, 160, Image.SCALE_SMOOTH);
+                Image img = icon.getImage().getScaledInstance(w, h, Image.SCALE_SMOOTH);
                 LbLogo.setIcon(new ImageIcon(img));
             } else {
                 System.err.println("Imagem não encontrada: " + path);
             }
         } catch (Exception e) {
             System.err.println("Erro ao carregar a logo: " + e.getMessage());
-            e.printStackTrace();
         }
     }
 
@@ -64,6 +68,11 @@ public class Login extends javax.swing.JFrame {
         BtnEntrar.setFont(new java.awt.Font("Inter", 0, 16)); // NOI18N
         BtnEntrar.setForeground(new java.awt.Color(255, 255, 255));
         BtnEntrar.setText("Entrar");
+        BtnEntrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEntrarActionPerformed(evt);
+            }
+        });
         PanelLogin.add(BtnEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 349, 250, 45));
 
         LbLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -96,6 +105,12 @@ public class Login extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BtnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEntrarActionPerformed
+        // TODO add your handling code here:
+        MainFrame mainframe = new MainFrame();
+        mainframe.setVisible(true);
+    }//GEN-LAST:event_BtnEntrarActionPerformed
 
     /**
      * @param args the command line arguments
