@@ -10,7 +10,7 @@
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -87,7 +87,7 @@
         <Component class="javax.swing.JToggleButton" name="BtnFornecedores">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="37" green="40" red="5d" type="rgb"/>
+              <Color blue="23" green="27" red="3e" type="rgb"/>
             </Property>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="BgLateral"/>
@@ -110,7 +110,7 @@
         <Component class="javax.swing.JToggleButton" name="BtnDashboard">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="37" green="40" red="5d" type="rgb"/>
+              <Color blue="23" green="27" red="3e" type="rgb"/>
             </Property>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="BgLateral"/>
@@ -121,6 +121,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
+            <Property name="selected" type="boolean" value="true"/>
             <Property name="text" type="java.lang.String" value="Dashboard"/>
             <Property name="horizontalAlignment" type="int" value="2"/>
             <Property name="horizontalTextPosition" type="int" value="2"/>
@@ -133,7 +134,7 @@
         <Component class="javax.swing.JToggleButton" name="BtnProdutos">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="37" green="40" red="5d" type="rgb"/>
+              <Color blue="23" green="27" red="3e" type="rgb"/>
             </Property>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="BgLateral"/>
@@ -156,7 +157,7 @@
         <Component class="javax.swing.JToggleButton" name="BtnVendas">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="37" green="40" red="5d" type="rgb"/>
+              <Color blue="23" green="27" red="3e" type="rgb"/>
             </Property>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="BgLateral"/>
@@ -192,7 +193,7 @@
         <Component class="javax.swing.JToggleButton" name="BtnRelatorios">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="37" green="40" red="5d" type="rgb"/>
+              <Color blue="23" green="27" red="3e" type="rgb"/>
             </Property>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="BgLateral"/>
@@ -215,7 +216,7 @@
         <Component class="javax.swing.JToggleButton" name="BtnUsuarios">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="37" green="40" red="5d" type="rgb"/>
+              <Color blue="23" green="27" red="3e" type="rgb"/>
             </Property>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="BgLateral"/>

@@ -6,7 +6,7 @@
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -23,7 +23,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="PanelFundo" alignment="0" pref="861" max="32767" attributes="0"/>
+          <Component id="PanelFundo" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -51,6 +51,9 @@
               <Dimension value="[300, 400]"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_LayoutCodePre" type="java.lang.String" value="View.standardCornerRadius(PanelLogin);"/>
+          </AuxValues>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
             <Property name="useNullLayout" type="boolean" value="false"/>

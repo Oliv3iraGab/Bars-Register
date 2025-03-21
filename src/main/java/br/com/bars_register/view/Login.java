@@ -6,6 +6,7 @@ package br.com.bars_register.view;
 
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import br.com.bars_register.util.View;
 
 /**
  *
@@ -63,6 +64,7 @@ public class Login extends javax.swing.JFrame {
 
         PanelLogin.setPreferredSize(new java.awt.Dimension(300, 400));
         PanelLogin.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        View.standardCornerRadius(PanelLogin);
 
         BtnEntrar.setBackground(new java.awt.Color(93, 64, 55));
         BtnEntrar.setFont(new java.awt.Font("Inter", 0, 16)); // NOI18N
@@ -96,7 +98,7 @@ public class Login extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelFundo, javax.swing.GroupLayout.DEFAULT_SIZE, 861, Short.MAX_VALUE)
+            .addComponent(PanelFundo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -104,10 +106,12 @@ public class Login extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEntrarActionPerformed
         // TODO add your handling code here:
+        this.dispose();
         MainFrame mainframe = new MainFrame();
         mainframe.setVisible(true);
     }//GEN-LAST:event_BtnEntrarActionPerformed
