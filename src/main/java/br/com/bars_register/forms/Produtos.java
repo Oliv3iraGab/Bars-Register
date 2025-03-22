@@ -4,6 +4,10 @@
  */
 package br.com.bars_register.forms;
 
+import br.com.bars_register.util.View;
+import java.awt.Color;
+import javax.swing.table.DefaultTableCellRenderer;
+
 /**
  *
  * @author limag
@@ -15,6 +19,12 @@ public class Produtos extends javax.swing.JFrame {
      */
     public Produtos() {
         initComponents();
+        DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
+        headerRenderer.setBackground(new Color(0x4E342E));
+
+        for (int i = 0; i < TblProdutos.getModel().getColumnCount(); i++) {
+            TblProdutos.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
+        }
     }
 
     /**
@@ -28,54 +38,74 @@ public class Produtos extends javax.swing.JFrame {
 
         PanelMain = new javax.swing.JPanel();
         PanelFundo = new javax.swing.JPanel();
+        txtBuscaProduto = new javax.swing.JTextField();
+        BtnNovoProduto = new javax.swing.JButton();
+        JsPanelTabelaProdutos = new javax.swing.JScrollPane();
+        TblProdutos = new javax.swing.JTable();
+        BtnExcluir = new javax.swing.JButton();
+        BtnEditar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         PanelMain.setBackground(new java.awt.Color(233, 236, 239));
+        PanelMain.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         PanelFundo.setBackground(new java.awt.Color(255, 255, 255));
+        View.standardCornerRadius(PanelFundo);
+        PanelFundo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout PanelFundoLayout = new javax.swing.GroupLayout(PanelFundo);
-        PanelFundo.setLayout(PanelFundoLayout);
-        PanelFundoLayout.setHorizontalGroup(
-            PanelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 630, Short.MAX_VALUE)
-        );
-        PanelFundoLayout.setVerticalGroup(
-            PanelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
-        );
+        txtBuscaProduto.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        PanelFundo.add(txtBuscaProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 256, 40));
 
-        javax.swing.GroupLayout PanelMainLayout = new javax.swing.GroupLayout(PanelMain);
-        PanelMain.setLayout(PanelMainLayout);
-        PanelMainLayout.setHorizontalGroup(
-            PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelMainLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(PanelFundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
-        );
-        PanelMainLayout.setVerticalGroup(
-            PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelMainLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(PanelFundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
-        );
+        BtnNovoProduto.setBackground(new java.awt.Color(93, 64, 55));
+        BtnNovoProduto.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
+        BtnNovoProduto.setForeground(new java.awt.Color(255, 255, 255));
+        BtnNovoProduto.setText("+Novo Produto");
+        BtnNovoProduto.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        PanelFundo.add(BtnNovoProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 20, 120, 40));
+
+        View.standardCornerRadius(JsPanelTabelaProdutos);
+
+        TblProdutos.setBackground(new java.awt.Color(248, 249, 250));
+        TblProdutos.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
+        TblProdutos.setForeground(new java.awt.Color(255, 255, 255));
+        TblProdutos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nome", "Preço", "Estoque", "Ações"
+            }
+        ));
+        TblProdutos.setGridColor(new java.awt.Color(78, 52, 46));
+        TblProdutos.setShowGrid(false);
+        JsPanelTabelaProdutos.setViewportView(TblProdutos);
+
+        PanelFundo.add(JsPanelTabelaProdutos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 610, 380));
+
+        PanelMain.add(PanelFundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 649, 465));
+
+        BtnExcluir.setBackground(new java.awt.Color(78, 52, 46));
+        BtnExcluir.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
+        BtnExcluir.setForeground(new java.awt.Color(255, 0, 0));
+        BtnExcluir.setText("Excluir");
+        PanelMain.add(BtnExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 495, 120, 40));
+
+        BtnEditar.setBackground(new java.awt.Color(78, 52, 46));
+        BtnEditar.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
+        BtnEditar.setForeground(new java.awt.Color(255, 255, 255));
+        BtnEditar.setText("Editar");
+        PanelMain.add(BtnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 495, 120, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(PanelMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(PanelMain, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(PanelMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(PanelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -117,7 +147,13 @@ public class Produtos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnEditar;
+    private javax.swing.JButton BtnExcluir;
+    private javax.swing.JButton BtnNovoProduto;
+    private javax.swing.JScrollPane JsPanelTabelaProdutos;
     private javax.swing.JPanel PanelFundo;
     private javax.swing.JPanel PanelMain;
+    private javax.swing.JTable TblProdutos;
+    private javax.swing.JTextField txtBuscaProduto;
     // End of variables declaration//GEN-END:variables
 }

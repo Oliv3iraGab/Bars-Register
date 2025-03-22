@@ -93,12 +93,12 @@
               <ComponentRef name="BgLateral"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Inter" size="11" style="0"/>
+              <Font name="Inter" size="13" style="0"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Fornecedores"/>
+            <Property name="text" type="java.lang.String" value="Fornecedor"/>
             <Property name="horizontalAlignment" type="int" value="2"/>
             <Property name="horizontalTextPosition" type="int" value="2"/>
             <Property name="iconTextGap" type="int" value="3"/>
@@ -116,7 +116,7 @@
               <ComponentRef name="BgLateral"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Inter" size="11" style="0"/>
+              <Font name="Inter" size="13" style="0"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -140,12 +140,12 @@
               <ComponentRef name="BgLateral"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Inter" size="11" style="0"/>
+              <Font name="Inter" size="13" style="0"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Produtos"/>
+            <Property name="text" type="java.lang.String" value="Produto"/>
             <Property name="horizontalAlignment" type="int" value="2"/>
             <Property name="horizontalTextPosition" type="int" value="2"/>
             <Property name="iconTextGap" type="int" value="3"/>
@@ -163,12 +163,12 @@
               <ComponentRef name="BgLateral"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Inter" size="11" style="0"/>
+              <Font name="Inter" size="13" style="0"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Vendas"/>
+            <Property name="text" type="java.lang.String" value="Venda"/>
             <Property name="horizontalAlignment" type="int" value="2"/>
             <Property name="horizontalTextPosition" type="int" value="2"/>
             <Property name="iconTextGap" type="int" value="3"/>
@@ -199,7 +199,7 @@
               <ComponentRef name="BgLateral"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Inter" size="11" style="0"/>
+              <Font name="Inter" size="13" style="0"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -222,12 +222,12 @@
               <ComponentRef name="BgLateral"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Inter" size="11" style="0"/>
+              <Font name="Inter" size="13" style="0"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Usu&#xe1;rios"/>
+            <Property name="text" type="java.lang.String" value="Usu&#xe1;rio"/>
             <Property name="horizontalAlignment" type="int" value="2"/>
             <Property name="horizontalTextPosition" type="int" value="2"/>
             <Property name="iconTextGap" type="int" value="3"/>
@@ -277,6 +277,11 @@
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JLabel" name="LbLogo">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/images/Logo-BarsMini.png"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="LbTitulo">
           <Properties>

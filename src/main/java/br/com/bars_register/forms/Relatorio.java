@@ -4,6 +4,8 @@
  */
 package br.com.bars_register.forms;
 
+import br.com.bars_register.util.View;
+
 /**
  *
  * @author limag
@@ -28,22 +30,146 @@ public class Relatorio extends javax.swing.JFrame {
 
         PanelMain = new javax.swing.JPanel();
         PanelFundo = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        PanelReceita = new javax.swing.JPanel();
+        LbReceitaTotal = new javax.swing.JLabel();
+        LbReceitaNumero = new javax.swing.JLabel();
+        PanelTotalVenda = new javax.swing.JPanel();
+        LbTotalVendas = new javax.swing.JLabel();
+        LbVendasNumero = new javax.swing.JLabel();
+        PanelDataEBotao = new javax.swing.JPanel();
+        txtDataInicial = new javax.swing.JFormattedTextField();
+        BtnGerar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         PanelMain.setBackground(new java.awt.Color(233, 236, 239));
 
         PanelFundo.setBackground(new java.awt.Color(255, 255, 255));
+        View.standardCornerRadius(PanelFundo);
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        jTextArea1.setRows(5);
+        jTextArea1.setBorder(null);
+        jScrollPane1.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout PanelFundoLayout = new javax.swing.GroupLayout(PanelFundo);
         PanelFundo.setLayout(PanelFundoLayout);
         PanelFundoLayout.setHorizontalGroup(
             PanelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 630, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
         );
         PanelFundoLayout.setVerticalGroup(
             PanelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+        );
+
+        PanelReceita.setBackground(new java.awt.Color(78, 52, 46));
+        PanelReceita.setPreferredSize(new java.awt.Dimension(180, 100));
+        View.standardCornerRadius(PanelReceita);
+
+        LbReceitaTotal.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        LbReceitaTotal.setForeground(new java.awt.Color(173, 181, 189));
+        LbReceitaTotal.setText("Receita Total");
+
+        LbReceitaNumero.setFont(new java.awt.Font("Inter", 0, 24)); // NOI18N
+        LbReceitaNumero.setForeground(new java.awt.Color(255, 255, 255));
+        LbReceitaNumero.setText("R$ 0,00");
+
+        javax.swing.GroupLayout PanelReceitaLayout = new javax.swing.GroupLayout(PanelReceita);
+        PanelReceita.setLayout(PanelReceitaLayout);
+        PanelReceitaLayout.setHorizontalGroup(
+            PanelReceitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelReceitaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(PanelReceitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(LbReceitaNumero, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+                    .addGroup(PanelReceitaLayout.createSequentialGroup()
+                        .addComponent(LbReceitaTotal)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        PanelReceitaLayout.setVerticalGroup(
+            PanelReceitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelReceitaLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(LbReceitaTotal)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(LbReceitaNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(43, Short.MAX_VALUE))
+        );
+
+        PanelTotalVenda.setBackground(new java.awt.Color(78, 52, 46));
+        PanelTotalVenda.setPreferredSize(new java.awt.Dimension(180, 100));
+        View.standardCornerRadius(PanelReceita);
+
+        LbTotalVendas.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        LbTotalVendas.setForeground(new java.awt.Color(173, 181, 189));
+        LbTotalVendas.setText("Total de vendas");
+
+        LbVendasNumero.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
+        LbVendasNumero.setForeground(new java.awt.Color(255, 255, 255));
+        LbVendasNumero.setText("0");
+
+        javax.swing.GroupLayout PanelTotalVendaLayout = new javax.swing.GroupLayout(PanelTotalVenda);
+        PanelTotalVenda.setLayout(PanelTotalVendaLayout);
+        PanelTotalVendaLayout.setHorizontalGroup(
+            PanelTotalVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelTotalVendaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(PanelTotalVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(LbTotalVendas)
+                    .addComponent(LbVendasNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(81, Short.MAX_VALUE))
+        );
+        PanelTotalVendaLayout.setVerticalGroup(
+            PanelTotalVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelTotalVendaLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(LbTotalVendas)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(LbVendasNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(43, Short.MAX_VALUE))
+        );
+
+        View.standardCornerRadius(PanelDataEBotao);
+        PanelDataEBotao.setBackground(new java.awt.Color(255, 255, 255));
+
+        txtDataInicial.setBackground(new java.awt.Color(248, 249, 250));
+        try {
+            txtDataInicial.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtDataInicial.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        View.standardCornerRadius(txtDataInicial);
+
+        BtnGerar.setBackground(new java.awt.Color(78, 52, 46));
+        BtnGerar.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        BtnGerar.setForeground(new java.awt.Color(255, 255, 255));
+        BtnGerar.setText("Gerar");
+
+        javax.swing.GroupLayout PanelDataEBotaoLayout = new javax.swing.GroupLayout(PanelDataEBotao);
+        PanelDataEBotao.setLayout(PanelDataEBotaoLayout);
+        PanelDataEBotaoLayout.setHorizontalGroup(
+            PanelDataEBotaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelDataEBotaoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtDataInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 383, Short.MAX_VALUE)
+                .addComponent(BtnGerar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        PanelDataEBotaoLayout.setVerticalGroup(
+            PanelDataEBotaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelDataEBotaoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(PanelDataEBotaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtDataInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnGerar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout PanelMainLayout = new javax.swing.GroupLayout(PanelMain);
@@ -52,13 +178,25 @@ public class Relatorio extends javax.swing.JFrame {
             PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelMainLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(PanelFundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(PanelMainLayout.createSequentialGroup()
+                        .addComponent(PanelReceita, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(PanelTotalVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(PanelFundo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PanelDataEBotao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
         PanelMainLayout.setVerticalGroup(
             PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelMainLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(27, 27, 27)
+                .addComponent(PanelDataEBotao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addGroup(PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(PanelReceita, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PanelTotalVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
                 .addComponent(PanelFundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(21, Short.MAX_VALUE))
         );
@@ -117,7 +255,18 @@ public class Relatorio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnGerar;
+    private javax.swing.JLabel LbReceitaNumero;
+    private javax.swing.JLabel LbReceitaTotal;
+    private javax.swing.JLabel LbTotalVendas;
+    private javax.swing.JLabel LbVendasNumero;
+    private javax.swing.JPanel PanelDataEBotao;
     private javax.swing.JPanel PanelFundo;
     private javax.swing.JPanel PanelMain;
+    private javax.swing.JPanel PanelReceita;
+    private javax.swing.JPanel PanelTotalVenda;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JFormattedTextField txtDataInicial;
     // End of variables declaration//GEN-END:variables
 }

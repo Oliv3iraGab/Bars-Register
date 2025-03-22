@@ -4,8 +4,6 @@
  */
 package br.com.bars_register.view;
 
-import java.awt.Image;
-import javax.swing.ImageIcon;
 import br.com.bars_register.util.View;
 
 /**
@@ -19,26 +17,8 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
-        String path = "/images/Logo-Bars.png";
-        int w = 119;
-        int h = 160;
-        carregarLogo(path, w, h);
     }
 
-    public void carregarLogo(String path, int w, int h) {
-        try {
-            java.net.URL imageURL = getClass().getResource(path);
-            if (imageURL != null) {
-                ImageIcon icon = new ImageIcon(imageURL);
-                Image img = icon.getImage().getScaledInstance(w, h, Image.SCALE_SMOOTH);
-                LbLogo.setIcon(new ImageIcon(img));
-            } else {
-                System.err.println("Imagem não encontrada: " + path);
-            }
-        } catch (Exception e) {
-            System.err.println("Erro ao carregar a logo: " + e.getMessage());
-        }
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -76,16 +56,19 @@ public class Login extends javax.swing.JFrame {
             }
         });
         PanelLogin.add(BtnEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 349, 250, 45));
+        View.standardCornerRadius(BtnEntrar);
 
         LbLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        LbLogo.setPreferredSize(new java.awt.Dimension(119, 160));
+        LbLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Logo-Bars.png"))); // NOI18N
         PanelLogin.add(LbLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, -1));
 
         txtSenha.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
         PanelLogin.add(txtSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 284, 250, 45));
+        View.standardCornerRadius(txtSenha);
 
         txtLogin.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
         PanelLogin.add(txtLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 229, 250, 45));
+        View.standardCornerRadius(txtLogin);
 
         jLabel1.setFont(new java.awt.Font("Montserrat", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(93, 64, 55));

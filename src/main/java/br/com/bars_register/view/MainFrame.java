@@ -4,9 +4,7 @@
  */
 package br.com.bars_register.view;
 
-import java.awt.Image;
-import javax.swing.ImageIcon;
-import java.awt.Color;
+import br.com.bars_register.util.View;
 import javax.swing.JToggleButton;
 
 /**
@@ -20,33 +18,14 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
-        String path = "/images/Logo-BarsMini.png";
-        int w = 27;
-        int h = 35;
-        carregarLogoMini(path, w, h);
 
-        // Configure all lateral toggle buttons
+        // Configura todos os botões laterais
         configureLateralButtons(BtnDashboard);
         configureLateralButtons(BtnProdutos);
         configureLateralButtons(BtnVendas);
         configureLateralButtons(BtnRelatorios);
         configureLateralButtons(BtnUsuarios);
         configureLateralButtons(BtnFornecedores);
-    }
-
-    public void carregarLogoMini(String path, int w, int h) {
-        try {
-            java.net.URL imageURL = getClass().getResource(path);
-            if (imageURL != null) {
-                ImageIcon icon = new ImageIcon(imageURL);
-                Image img = icon.getImage().getScaledInstance(w, h, Image.SCALE_SMOOTH);
-                LbLogo.setIcon(new ImageIcon(img));
-            } else {
-                System.err.println("Imagem não encontrada: " + path);
-            }
-        } catch (Exception e) {
-            System.err.println("Erro ao carregar a logo: " + e.getMessage());
-        }
     }
 
     private void configureLateralButtons(JToggleButton button) {
@@ -85,9 +64,9 @@ public class MainFrame extends javax.swing.JFrame {
 
         BtnFornecedores.setBackground(new java.awt.Color(62, 39, 35));
         BgLateral.add(BtnFornecedores);
-        BtnFornecedores.setFont(new java.awt.Font("Inter", 0, 11)); // NOI18N
+        BtnFornecedores.setFont(new java.awt.Font("Inter", 0, 13)); // NOI18N
         BtnFornecedores.setForeground(new java.awt.Color(255, 255, 255));
-        BtnFornecedores.setText("Fornecedores");
+        BtnFornecedores.setText("Fornecedor");
         BtnFornecedores.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnFornecedores.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         BtnFornecedores.setIconTextGap(3);
@@ -95,7 +74,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         BtnDashboard.setBackground(new java.awt.Color(62, 39, 35));
         BgLateral.add(BtnDashboard);
-        BtnDashboard.setFont(new java.awt.Font("Inter", 0, 11)); // NOI18N
+        BtnDashboard.setFont(new java.awt.Font("Inter", 0, 13)); // NOI18N
         BtnDashboard.setForeground(new java.awt.Color(255, 255, 255));
         BtnDashboard.setSelected(true);
         BtnDashboard.setText("Dashboard");
@@ -106,9 +85,9 @@ public class MainFrame extends javax.swing.JFrame {
 
         BtnProdutos.setBackground(new java.awt.Color(62, 39, 35));
         BgLateral.add(BtnProdutos);
-        BtnProdutos.setFont(new java.awt.Font("Inter", 0, 11)); // NOI18N
+        BtnProdutos.setFont(new java.awt.Font("Inter", 0, 13)); // NOI18N
         BtnProdutos.setForeground(new java.awt.Color(255, 255, 255));
-        BtnProdutos.setText("Produtos");
+        BtnProdutos.setText("Produto");
         BtnProdutos.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnProdutos.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         BtnProdutos.setIconTextGap(3);
@@ -116,9 +95,9 @@ public class MainFrame extends javax.swing.JFrame {
 
         BtnVendas.setBackground(new java.awt.Color(62, 39, 35));
         BgLateral.add(BtnVendas);
-        BtnVendas.setFont(new java.awt.Font("Inter", 0, 11)); // NOI18N
+        BtnVendas.setFont(new java.awt.Font("Inter", 0, 13)); // NOI18N
         BtnVendas.setForeground(new java.awt.Color(255, 255, 255));
-        BtnVendas.setText("Vendas");
+        BtnVendas.setText("Venda");
         BtnVendas.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnVendas.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         BtnVendas.setIconTextGap(3);
@@ -130,7 +109,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         BtnRelatorios.setBackground(new java.awt.Color(62, 39, 35));
         BgLateral.add(BtnRelatorios);
-        BtnRelatorios.setFont(new java.awt.Font("Inter", 0, 11)); // NOI18N
+        BtnRelatorios.setFont(new java.awt.Font("Inter", 0, 13)); // NOI18N
         BtnRelatorios.setForeground(new java.awt.Color(255, 255, 255));
         BtnRelatorios.setText("Relatório");
         BtnRelatorios.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -140,9 +119,9 @@ public class MainFrame extends javax.swing.JFrame {
 
         BtnUsuarios.setBackground(new java.awt.Color(62, 39, 35));
         BgLateral.add(BtnUsuarios);
-        BtnUsuarios.setFont(new java.awt.Font("Inter", 0, 11)); // NOI18N
+        BtnUsuarios.setFont(new java.awt.Font("Inter", 0, 13)); // NOI18N
         BtnUsuarios.setForeground(new java.awt.Color(255, 255, 255));
-        BtnUsuarios.setText("Usuários");
+        BtnUsuarios.setText("Usuário");
         BtnUsuarios.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnUsuarios.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         BtnUsuarios.setIconTextGap(3);
@@ -188,6 +167,8 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().add(PanelLateral, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 130, 540));
 
         PanelSuperior.setBackground(new java.awt.Color(93, 64, 55));
+
+        LbLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Logo-BarsMini.png"))); // NOI18N
 
         LbTitulo.setFont(new java.awt.Font("Inter", 1, 20)); // NOI18N
         LbTitulo.setForeground(new java.awt.Color(255, 255, 255));
