@@ -14,26 +14,26 @@ public class View {
 
     public static void standardCornerRadius(JPanel panel) {
         panel.putClientProperty("FlatLaf.style",
-                "arc: 10");
+                "arc: 15");
     }
 
     public static void standardCornerRadius(JButton panel) {
         panel.putClientProperty("FlatLaf.style",
-                "arc: 10");
+                "arc: 15");
     }
 
     public static void standardCornerRadius(JTextField panel) {
         panel.putClientProperty("FlatLaf.style",
-                "arc: 10");
+                "arc: 15");
     }
 
     public static void standardCornerRadius(JScrollPane panel) {
         panel.putClientProperty("FlatLaf.style",
-                "arc: 10");
+                "arc: 15");
     }
 
     public static void standardCornerRadius(JFormattedTextField table) {
         table.putClientProperty("FlatLaf.style",
-                "arc: 10");
+                "arc: 15");
     }
 }
