@@ -1,9 +1,7 @@
 package br.com.bars_register;
 
-import br.com.bars_register.persistence.Produto;
 import br.com.bars_register.view.Login;
 import com.formdev.flatlaf.FlatIntelliJLaf;
-import java.util.Scanner;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -22,7 +20,7 @@ public class Bars_Register {
         } catch (UnsupportedLookAndFeelException e) {
             JOptionPane.showMessageDialog(
                     null,
-                    "Failed to initialize LaF " + e.getMessage(),
+                    "Falha ao iniciar o FlatLaf " + e.getMessage(),
                     "ERRO",
                     JOptionPane.WARNING_MESSAGE);
         }
