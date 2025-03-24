@@ -50,6 +50,8 @@ public class Dashboard extends javax.swing.JFrame {
         LbVendasRecentes.setFont(new java.awt.Font("Inter", 1, 16)); // NOI18N
         LbVendasRecentes.setText("Vendas Recentes");
 
+        View.standardCornerRadius(ScPanelVendasRecentes);
+
         TblVendasRecentes.setAutoCreateRowSorter(true);
         TblVendasRecentes.setBackground(new java.awt.Color(248, 249, 250));
         TblVendasRecentes.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
@@ -69,6 +71,7 @@ public class Dashboard extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        View.standardCornerRadius(TblVendasRecentes);
         TblVendasRecentes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         TblVendasRecentes.setShowGrid(false);
         ScPanelVendasRecentes.setViewportView(TblVendasRecentes);

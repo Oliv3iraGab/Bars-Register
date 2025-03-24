@@ -132,6 +132,7 @@
                 </Component>
                 <Container class="javax.swing.JScrollPane" name="ScPanelVendasRecentes">
                   <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="View.standardCornerRadius(ScPanelVendasRecentes);"/>
                     <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
                   </AuxValues>
 
@@ -146,7 +147,7 @@
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Inter" size="14" style="0"/>
                         </Property>
-                        <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                        <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor" postCode="View.standardCornerRadius(TblVendasRecentes);">
                           <Table columnCount="3" rowCount="0">
                             <Column editable="false" title="Data" type="java.lang.Object"/>
                             <Column editable="false" title="Total" type="java.lang.Object"/>

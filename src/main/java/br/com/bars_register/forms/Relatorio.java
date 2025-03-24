@@ -41,6 +41,7 @@ public class Relatorio extends javax.swing.JFrame {
         PanelDataEBotao = new javax.swing.JPanel();
         txtDataInicial = new javax.swing.JFormattedTextField();
         BtnGerar = new javax.swing.JButton();
+        txtDataInicial1 = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -153,14 +154,25 @@ public class Relatorio extends javax.swing.JFrame {
         BtnGerar.setText("Gerar");
         View.standardCornerRadius(BtnGerar);
 
+        txtDataInicial1.setBackground(new java.awt.Color(248, 249, 250));
+        try {
+            txtDataInicial1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtDataInicial1.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        View.standardCornerRadius(txtDataInicial);
+
         javax.swing.GroupLayout PanelDataEBotaoLayout = new javax.swing.GroupLayout(PanelDataEBotao);
         PanelDataEBotao.setLayout(PanelDataEBotaoLayout);
         PanelDataEBotaoLayout.setHorizontalGroup(
             PanelDataEBotaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelDataEBotaoLayout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(txtDataInicial1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(txtDataInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 383, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 238, Short.MAX_VALUE)
                 .addComponent(BtnGerar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -168,10 +180,12 @@ public class Relatorio extends javax.swing.JFrame {
             PanelDataEBotaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelDataEBotaoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(PanelDataEBotaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtDataInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(PanelDataEBotaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelDataEBotaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtDataInicial1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtDataInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(BtnGerar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout PanelMainLayout = new javax.swing.GroupLayout(PanelMain);
@@ -270,5 +284,6 @@ public class Relatorio extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JFormattedTextField txtDataInicial;
+    private javax.swing.JFormattedTextField txtDataInicial1;
     // End of variables declaration//GEN-END:variables
 }

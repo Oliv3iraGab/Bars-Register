@@ -181,11 +181,13 @@ public class Fornecedores extends javax.swing.JFrame {
         BtnExcluir.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         BtnExcluir.setForeground(new java.awt.Color(255, 0, 0));
         BtnExcluir.setText("Excluir");
+        View.standardCornerRadius(BtnExcluir);
 
         BtnEditar.setBackground(new java.awt.Color(78, 52, 46));
         BtnEditar.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         BtnEditar.setForeground(new java.awt.Color(255, 255, 255));
         BtnEditar.setText("Editar");
+        View.standardCornerRadius(BtnEditar);
 
         javax.swing.GroupLayout PanelMainLayout = new javax.swing.GroupLayout(PanelMain);
         PanelMain.setLayout(PanelMainLayout);

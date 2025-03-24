@@ -4,6 +4,8 @@
  */
 package br.com.bars_register.view;
 
+import com.formdev.flatlaf.FlatClientProperties;
+
 import br.com.bars_register.util.View;
 
 /**
@@ -17,6 +19,8 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        txtLogin.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Login");
+        txtSenha.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Senha");
     }
 
 

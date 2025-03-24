@@ -332,6 +332,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Excluir"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="View.standardCornerRadius(BtnExcluir);"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="BtnEditar">
           <Properties>
@@ -346,6 +349,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Editar"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="View.standardCornerRadius(BtnEditar);"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

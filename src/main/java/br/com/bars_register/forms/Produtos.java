@@ -5,8 +5,6 @@
 package br.com.bars_register.forms;
 
 import br.com.bars_register.util.View;
-import java.awt.Color;
-import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  *
@@ -19,12 +17,6 @@ public class Produtos extends javax.swing.JFrame {
      */
     public Produtos() {
         initComponents();
-        DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
-        headerRenderer.setBackground(new Color(0x4E342E));
-
-        for (int i = 0; i < TblProdutos.getModel().getColumnCount(); i++) {
-            TblProdutos.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
-        }
     }
 
     /**
