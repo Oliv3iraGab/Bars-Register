@@ -63,7 +63,7 @@ public class Relatorio extends javax.swing.JFrame {
         );
         PanelFundoLayout.setVerticalGroup(
             PanelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
         );
 
         PanelReceita.setBackground(new java.awt.Color(78, 52, 46));
@@ -103,7 +103,7 @@ public class Relatorio extends javax.swing.JFrame {
 
         PanelTotalVenda.setBackground(new java.awt.Color(78, 52, 46));
         PanelTotalVenda.setPreferredSize(new java.awt.Dimension(180, 100));
-        View.standardCornerRadius(PanelReceita);
+        View.standardCornerRadius(PanelTotalVenda);
 
         LbTotalVendas.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
         LbTotalVendas.setForeground(new java.awt.Color(173, 181, 189));
@@ -136,6 +136,7 @@ public class Relatorio extends javax.swing.JFrame {
 
         View.standardCornerRadius(PanelDataEBotao);
         PanelDataEBotao.setBackground(new java.awt.Color(255, 255, 255));
+        View.standardCornerRadius(PanelDataEBotao);
 
         txtDataInicial.setBackground(new java.awt.Color(248, 249, 250));
         try {
@@ -150,6 +151,7 @@ public class Relatorio extends javax.swing.JFrame {
         BtnGerar.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
         BtnGerar.setForeground(new java.awt.Color(255, 255, 255));
         BtnGerar.setText("Gerar");
+        View.standardCornerRadius(BtnGerar);
 
         javax.swing.GroupLayout PanelDataEBotaoLayout = new javax.swing.GroupLayout(PanelDataEBotao);
         PanelDataEBotao.setLayout(PanelDataEBotaoLayout);
@@ -198,7 +200,7 @@ public class Relatorio extends javax.swing.JFrame {
                     .addComponent(PanelTotalVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addComponent(PanelFundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(8, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

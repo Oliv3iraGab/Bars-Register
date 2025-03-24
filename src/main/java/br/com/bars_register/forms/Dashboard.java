@@ -35,6 +35,7 @@ public class Dashboard extends javax.swing.JFrame {
         LbNumeroProdutos = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setSize(new java.awt.Dimension(670, 540));
 
         PanelMain.setBackground(new java.awt.Color(233, 236, 239));
 
@@ -51,14 +52,23 @@ public class Dashboard extends javax.swing.JFrame {
 
         TblVendasRecentes.setAutoCreateRowSorter(true);
         TblVendasRecentes.setBackground(new java.awt.Color(248, 249, 250));
+        TblVendasRecentes.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
         TblVendasRecentes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-
+                "Data", "Total", "Produtos"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         TblVendasRecentes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         TblVendasRecentes.setShowGrid(false);
         ScPanelVendasRecentes.setViewportView(TblVendasRecentes);

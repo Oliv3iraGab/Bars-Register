@@ -56,6 +56,7 @@ public class Produtos extends javax.swing.JFrame {
 
         txtBuscaProduto.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
         PanelFundo.add(txtBuscaProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 256, 40));
+        View.standardCornerRadius(txtBuscaProduto);
 
         BtnNovoProduto.setBackground(new java.awt.Color(93, 64, 55));
         BtnNovoProduto.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
@@ -63,6 +64,7 @@ public class Produtos extends javax.swing.JFrame {
         BtnNovoProduto.setText("+Novo Produto");
         BtnNovoProduto.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         PanelFundo.add(BtnNovoProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 20, 120, 40));
+        View.standardCornerRadius(BtnNovoProduto);
 
         View.standardCornerRadius(JsPanelTabelaProdutos);
 
@@ -90,12 +92,14 @@ public class Produtos extends javax.swing.JFrame {
         BtnExcluir.setForeground(new java.awt.Color(255, 0, 0));
         BtnExcluir.setText("Excluir");
         PanelMain.add(BtnExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 495, 120, 40));
+        View.standardCornerRadius(BtnExcluir);
 
         BtnEditar.setBackground(new java.awt.Color(78, 52, 46));
         BtnEditar.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         BtnEditar.setForeground(new java.awt.Color(255, 255, 255));
         BtnEditar.setText("Editar");
         PanelMain.add(BtnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 495, 120, 40));
+        View.standardCornerRadius(BtnEditar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

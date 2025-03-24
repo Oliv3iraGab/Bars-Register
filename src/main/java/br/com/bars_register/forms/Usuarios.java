@@ -39,7 +39,7 @@ public class Usuarios extends javax.swing.JFrame {
         PanelMain = new javax.swing.JPanel();
         JsPanelTblUsuarios = new javax.swing.JScrollPane();
         TblUsuarios = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        BtnNovoUsuario = new javax.swing.JButton();
         BtnExcluir = new javax.swing.JButton();
         BtnEditar = new javax.swing.JButton();
 
@@ -61,20 +61,23 @@ public class Usuarios extends javax.swing.JFrame {
         ));
         JsPanelTblUsuarios.setViewportView(TblUsuarios);
 
-        jButton1.setBackground(new java.awt.Color(78, 52, 46));
-        jButton1.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("+Novo Usuário");
+        BtnNovoUsuario.setBackground(new java.awt.Color(78, 52, 46));
+        BtnNovoUsuario.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        BtnNovoUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        BtnNovoUsuario.setText("+Novo Usuário");
+        View.standardCornerRadius(BtnNovoUsuario);
 
         BtnExcluir.setBackground(new java.awt.Color(78, 52, 46));
         BtnExcluir.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         BtnExcluir.setForeground(new java.awt.Color(255, 0, 0));
         BtnExcluir.setText("Excluir");
+        View.standardCornerRadius(BtnExcluir);
 
         BtnEditar.setBackground(new java.awt.Color(78, 52, 46));
         BtnEditar.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         BtnEditar.setForeground(new java.awt.Color(255, 255, 255));
         BtnEditar.setText("Editar");
+        View.standardCornerRadius(BtnEditar);
 
         javax.swing.GroupLayout PanelMainLayout = new javax.swing.GroupLayout(PanelMain);
         PanelMain.setLayout(PanelMainLayout);
@@ -87,7 +90,7 @@ public class Usuarios extends javax.swing.JFrame {
                         .addComponent(BtnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
                         .addComponent(BtnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton1)
+                    .addComponent(BtnNovoUsuario)
                     .addComponent(JsPanelTblUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 633, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
@@ -95,7 +98,7 @@ public class Usuarios extends javax.swing.JFrame {
             PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelMainLayout.createSequentialGroup()
                 .addContainerGap(21, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtnNovoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(JsPanelTblUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -159,9 +162,9 @@ public class Usuarios extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnEditar;
     private javax.swing.JButton BtnExcluir;
+    private javax.swing.JButton BtnNovoUsuario;
     private javax.swing.JScrollPane JsPanelTblUsuarios;
     private javax.swing.JPanel PanelMain;
     private javax.swing.JTable TblUsuarios;
-    private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 }
