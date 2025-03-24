@@ -33,6 +33,7 @@ public class Login extends javax.swing.JFrame {
         PanelLogin = new javax.swing.JPanel();
         BtnEntrar = new javax.swing.JButton();
         LbLogo = new javax.swing.JLabel();
+        BtnView = new javax.swing.JButton();
         txtSenha = new javax.swing.JPasswordField();
         txtLogin = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -61,6 +62,15 @@ public class Login extends javax.swing.JFrame {
         LbLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LbLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Logo-Bars.png"))); // NOI18N
         PanelLogin.add(LbLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, -1));
+
+        BtnView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Closed_Eye.png"))); // NOI18N
+        BtnView.setBorder(null);
+        BtnView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnViewActionPerformed(evt);
+            }
+        });
+        PanelLogin.add(BtnView, new org.netbeans.lib.awtextra.AbsoluteConstraints(247, 295, 24, 24));
 
         txtSenha.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
         PanelLogin.add(txtSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 284, 250, 45));
@@ -99,6 +109,20 @@ public class Login extends javax.swing.JFrame {
         mainframe.setVisible(true);
     }//GEN-LAST:event_BtnEntrarActionPerformed
 
+    private boolean passwordVisible = false;
+
+    private void BtnViewActionPerformed(java.awt.event.ActionEvent evt) {
+        passwordVisible = !passwordVisible;
+        
+        if (passwordVisible) {
+            txtSenha.setEchoChar((char) 0);
+            BtnView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Open_Eye.png"))); // Change to closed eye
+        } else {
+            txtSenha.setEchoChar('•');
+            BtnView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Closed_Eye.png"))); // Change to open eye
+        }
+    }                                       
+
     /**
      * @param args the command line arguments
      */
@@ -136,6 +160,7 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnEntrar;
+    private javax.swing.JButton BtnView;
     private javax.swing.JLabel LbLogo;
     private javax.swing.JPanel PanelFundo;
     private javax.swing.JPanel PanelLogin;
