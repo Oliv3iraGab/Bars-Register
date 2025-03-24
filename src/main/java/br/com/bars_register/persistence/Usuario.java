@@ -4,10 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
 
-/**
- *
- * @author limag
- */
 @Getter
 @Setter
 @NoArgsConstructor
