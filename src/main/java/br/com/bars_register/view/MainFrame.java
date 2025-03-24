@@ -6,19 +6,26 @@ package br.com.bars_register.view;
 
 import br.com.bars_register.util.View;
 import javax.swing.JToggleButton;
+import javax.swing.JPanel;
+import java.awt.BorderLayout;
+import br.com.bars_register.forms.*;
 
 /**
  *
  * @author limag
  */
 public class MainFrame extends javax.swing.JFrame {
-
-    /**
-     * Creates new form MainFrame
-     */
+    // Painéis do sistema
+    private Dashboard dashboardPanel;
+    private Produtos produtosPanel;
+    private Vendas vendasPanel;
+    private Usuarios usuariosPanel;
+    private Fornecedores fornecedoresPanel;
+    private Relatorio relatorioPanel;
+    
     public MainFrame() {
         initComponents();
-
+    
         // Configura todos os botões laterais
         configureLateralButtons(BtnDashboard);
         configureLateralButtons(BtnProdutos);
@@ -26,8 +33,80 @@ public class MainFrame extends javax.swing.JFrame {
         configureLateralButtons(BtnRelatorios);
         configureLateralButtons(BtnUsuarios);
         configureLateralButtons(BtnFornecedores);
+        
+        // Inicializa os painéis
+        inicializarPaineis();
+        
+        // Adiciona os listeners aos botões
+        BtnDashboard.addActionListener(e -> trocarPainel("Dashboard"));
+        BtnProdutos.addActionListener(e -> trocarPainel("Produtos"));
+        BtnVendas.addActionListener(e -> trocarPainel("Vendas"));
+        BtnRelatorios.addActionListener(e -> trocarPainel("Relatorios"));
+        BtnUsuarios.addActionListener(e -> trocarPainel("Usuarios"));
+        BtnFornecedores.addActionListener(e -> trocarPainel("Fornecedores"));
+        
+        // Mostra o painel Dashboard por padrão
+        trocarPainel("Dashboard");
     }
-
+    
+    private void inicializarPaineis() {
+        // Cria as instâncias dos painéis
+        dashboardPanel = new Dashboard();
+        vendasPanel = new Vendas();
+        produtosPanel = new Produtos();
+        usuariosPanel = new Usuarios();
+        fornecedoresPanel = new Fornecedores();
+        relatorioPanel = new Relatorio();
+        
+        // Converte os JFrames para JPanels e armazena seus painéis principais
+        dashboardPanel.setContentPane((JPanel)dashboardPanel.getContentPane());
+        vendasPanel.setContentPane((JPanel)vendasPanel.getContentPane());
+        produtosPanel.setContentPane((JPanel)produtosPanel.getContentPane());
+        usuariosPanel.setContentPane((JPanel)usuariosPanel.getContentPane());
+        fornecedoresPanel.setContentPane((JPanel)fornecedoresPanel.getContentPane());
+        relatorioPanel.setContentPane((JPanel)relatorioPanel.getContentPane());
+    }
+    
+    private void trocarPainel(String nomePainel) {
+        // Remove todos os componentes do painel principal
+        PanelMain.removeAll();
+        
+        // Adiciona o painel selecionado
+        JPanel painelSelecionado = null;
+        switch (nomePainel) {
+            case "Dashboard":
+                painelSelecionado = (JPanel)dashboardPanel.getContentPane();
+                break;
+            case "Produtos":
+                painelSelecionado = (JPanel)produtosPanel.getContentPane();
+                break;
+            case "Vendas":
+                painelSelecionado = (JPanel)vendasPanel.getContentPane();
+                break;
+            case "Usuarios":
+                painelSelecionado = (JPanel)usuariosPanel.getContentPane();
+                break;
+            case "Fornecedores":
+                painelSelecionado = (JPanel)fornecedoresPanel.getContentPane();
+                break;
+            case "Relatorios":
+                painelSelecionado = (JPanel)relatorioPanel.getContentPane();
+                break;
+        }
+        
+        if (painelSelecionado != null) {
+            // Configura o layout do PanelMain para BorderLayout
+            PanelMain.setLayout(new BorderLayout());
+            
+            // Adiciona o painel selecionado ocupando todo o espaço
+            PanelMain.add(painelSelecionado, BorderLayout.CENTER);
+        }
+        
+        // Atualiza o painel
+        PanelMain.revalidate();
+        PanelMain.repaint();
+    }
+    
     private void configureLateralButtons(JToggleButton button) {
         button.setFocusPainted(false);
         button.setBorderPainted(false);
@@ -198,18 +277,7 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().add(PanelSuperior, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 60));
 
         PanelMain.setBackground(new java.awt.Color(233, 236, 239));
-
-        javax.swing.GroupLayout PanelMainLayout = new javax.swing.GroupLayout(PanelMain);
-        PanelMain.setLayout(PanelMainLayout);
-        PanelMainLayout.setHorizontalGroup(
-            PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 670, Short.MAX_VALUE)
-        );
-        PanelMainLayout.setVerticalGroup(
-            PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 540, Short.MAX_VALUE)
-        );
-
+        PanelMain.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(PanelMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 670, 540));
 
         pack();
