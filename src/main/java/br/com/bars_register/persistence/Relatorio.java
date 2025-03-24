@@ -2,27 +2,21 @@ package br.com.bars_register.persistence;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 import java.util.Map;
 
 @Getter
 @Setter
-@NoArgsConstructor
 public class Relatorio {
     private int id;
-    private LocalDateTime dataGeracao;
+    private static final LocalDateTime dataGeracao = LocalDateTime.now();
     private LocalDateTime dataInicial;
     private LocalDateTime dataFinal;
     private Usuario gerador;
     private double totalVendas;
     private int quantidadeVendas;
     private Map<Venda.TipoPagamento, Double> vendasPorTipo;
-    private double totalDespesas;
     
-    public double getLucroLiquido() {
-        return totalVendas - totalDespesas;
-    }
     
     public double getTicketMedio() {
         return quantidadeVendas > 0 ? totalVendas / quantidadeVendas : 0;
@@ -41,9 +35,6 @@ public class Relatorio {
         vendasPorTipo.forEach((tipo, valor) -> 
             sb.append(String.format("%s: R$ %.2f\n", tipo, valor))
         );
-        
-        sb.append(String.format("\nDespesas Totais: R$ %.2f\n", totalDespesas));
-        sb.append(String.format("Lucro Líquido: R$ %.2f\n\n", getLucroLiquido()));
         
         sb.append("----------------------------------------\n");
         sb.append(String.format("Gerado por: %s\n", gerador.getNome()));
