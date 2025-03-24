@@ -15,36 +15,4 @@ public class Venda {
     public Venda() {
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Date getData() {
-        return data;
-    }
-
-    public void setData(Date data) {
-        this.data = data;
-    }
-
-    public double getTotal() {
-        return total;
-    }
-
-    public void setTotal(double total) {
-        this.total = total;
-    }
-
-    public Produto getProdutos() {
-        return produtos;
-    }
-
-    public void setProdutos(Produto produtos) {
-        this.produtos = produtos;
-    }
-    
 }
