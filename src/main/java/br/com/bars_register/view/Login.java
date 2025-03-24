@@ -103,7 +103,6 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEntrarActionPerformed
-        // TODO add your handling code here:
         this.dispose();
         MainFrame mainframe = new MainFrame();
         mainframe.setVisible(true);
@@ -116,10 +115,10 @@ public class Login extends javax.swing.JFrame {
         
         if (passwordVisible) {
             txtSenha.setEchoChar((char) 0);
-            BtnView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Open_Eye.png"))); // Change to closed eye
+            BtnView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Open_Eye.png")));
         } else {
             txtSenha.setEchoChar('•');
-            BtnView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Closed_Eye.png"))); // Change to open eye
+            BtnView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Closed_Eye.png")));
         }
     }                                       
 
