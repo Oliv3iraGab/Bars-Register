@@ -6,6 +6,7 @@ package br.com.bars_register.view;
 
 import br.com.bars_register.persistence.Produto;
 import br.com.bars_register.util.View;
+import br.com.bars_register.view.forms.Produtos;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,11 +15,20 @@ import javax.swing.JOptionPane;
  */
 public class RegistroProdutos extends javax.swing.JFrame {
 
-    /**
-     * Creates new form RegistroProdutos
-     */
-    public RegistroProdutos() {
+    private Produtos produtosFrame;
+
+    public RegistroProdutos(Produtos produtosFrame) {
         initComponents();
+        this.produtosFrame = produtosFrame;
+        
+        // Listner para quando apertar enter clicar no botão "Confirmar"
+        txtAcoes.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+                    BtnConfirmarActionPerformed(null);
+                }
+            }
+        });
     }
 
     /**
@@ -74,7 +84,7 @@ public class RegistroProdutos extends javax.swing.JFrame {
         txtNome.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
         View.standardCornerRadius(txtNome);
 
-        txtPreco.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00"))));
+        txtPreco.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtPreco.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
         View.standardCornerRadius(txtPreco);
 
@@ -109,7 +119,7 @@ public class RegistroProdutos extends javax.swing.JFrame {
                                 .addGap(0, 0, 0)
                                 .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(105, Short.MAX_VALUE))
+                        .addContainerGap(125, Short.MAX_VALUE))
                     .addGroup(PanelFundoLayout.createSequentialGroup()
                         .addGroup(PanelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(LbEstoque)
@@ -147,14 +157,14 @@ public class RegistroProdutos extends javax.swing.JFrame {
                 .addGroup(PanelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LbEstoque1)
                     .addComponent(txtAcoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BtnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(8, Short.MAX_VALUE))
         );
 
         View.standardCornerRadius(BtnConfirmar);
 
-        PanelMain.add(PanelFundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 410, 230));
+        PanelMain.add(PanelFundo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 430, 230));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -164,7 +174,7 @@ public class RegistroProdutos extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelMain, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
+            .addComponent(PanelMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -173,7 +183,7 @@ public class RegistroProdutos extends javax.swing.JFrame {
 
     private void BtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConfirmarActionPerformed
         String nome = txtNome.getText();
-        String preco = txtPreco.getText();
+        String preco = txtPreco.getText().replace(",", ".");
         String estoque = txtEstoque.getText();
         String acoes = txtAcoes.getText();
 
@@ -191,6 +201,7 @@ public class RegistroProdutos extends javax.swing.JFrame {
                 produto.setAcoes(acoes);
 
                 JOptionPane.showMessageDialog(this, "Produto registrado!");
+                produtosFrame.adicionarProduto(produto);
                 this.dispose();
 
             } catch (Exception e) {
@@ -229,7 +240,7 @@ public class RegistroProdutos extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RegistroProdutos().setVisible(true);
+                new RegistroProdutos(null).setVisible(true);
             }
         });
     }

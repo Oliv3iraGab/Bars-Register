@@ -4,9 +4,12 @@
  */
 package br.com.bars_register.view.forms;
 
+import br.com.bars_register.persistence.Produto;
 import br.com.bars_register.util.View;
 import br.com.bars_register.view.RegistroProdutos;
 import com.formdev.flatlaf.FlatClientProperties;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -14,12 +17,42 @@ import com.formdev.flatlaf.FlatClientProperties;
  */
 public class Produtos extends javax.swing.JFrame {
 
+    private ArrayList<Produto> listaProdutos = new ArrayList<>();
+
     /**
      * Creates new form Produtos
      */
     public Produtos() {
         initComponents();
+        atualizarTabelaProdutos();
         txtBuscaProduto.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Busque um produto");
+        
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                atualizarTabelaProdutos();
+            }
+        });
+    }
+
+    private void atualizarTabelaProdutos() {
+        DefaultTableModel modeloTable = (DefaultTableModel) TblProdutos.getModel();
+        modeloTable.setRowCount(0);
+
+        for (Produto produto : listaProdutos) {
+            Object[] rowData = {
+                produto.getNome(),
+                produto.getPreco(),
+                produto.getEstoque(),
+                produto.getAcoes()
+            };
+            modeloTable.addRow(rowData);
+        }
+    }
+
+    public void adicionarProduto(Produto produto) {
+        listaProdutos.add(produto);
+        atualizarTabelaProdutos();
     }
 
     /**
@@ -71,7 +104,7 @@ public class Produtos extends javax.swing.JFrame {
 
         TblProdutos.setBackground(new java.awt.Color(248, 249, 250));
         TblProdutos.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
-        TblProdutos.setForeground(new java.awt.Color(255, 255, 255));
+        TblProdutos.setForeground(new java.awt.Color(0, 0, 0));
         TblProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -117,9 +150,9 @@ public class Produtos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnNovoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNovoProdutoActionPerformed
-        RegistroProdutos registroProdutos = new RegistroProdutos();
+        RegistroProdutos registroProdutos = new RegistroProdutos(this);
         registroProdutos.setVisible(true);
-        
+
     }//GEN-LAST:event_BtnNovoProdutoActionPerformed
 
     /**
