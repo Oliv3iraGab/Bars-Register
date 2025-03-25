@@ -21,8 +21,16 @@ public class Login extends javax.swing.JFrame {
         initComponents();
         txtLogin.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Login");
         txtSenha.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Senha");
+        
+        // Listner para quando apertar enter clicar no botão "Entrar"
+        txtSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+                    BtnEntrarActionPerformed(null);
+                }
+            }
+        });
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -117,7 +125,7 @@ public class Login extends javax.swing.JFrame {
 
     private void BtnViewActionPerformed(java.awt.event.ActionEvent evt) {
         passwordVisible = !passwordVisible;
-        
+
         // Alterna a visualização quando o botão é pressionado
         if (passwordVisible) {
             txtSenha.setEchoChar((char) 0);
@@ -126,7 +134,7 @@ public class Login extends javax.swing.JFrame {
             txtSenha.setEchoChar('•');
             BtnView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Closed_Eye.png")));
         }
-    }                                       
+    }
 
     /**
      * @param args the command line arguments
