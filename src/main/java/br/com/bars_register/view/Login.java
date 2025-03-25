@@ -43,6 +43,7 @@ public class Login extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         PanelFundo.setBackground(new java.awt.Color(233, 236, 239));
         PanelFundo.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 250, 100));
@@ -117,6 +118,7 @@ public class Login extends javax.swing.JFrame {
     private void BtnViewActionPerformed(java.awt.event.ActionEvent evt) {
         passwordVisible = !passwordVisible;
         
+        // Alterna a visualização quando o botão é pressionado
         if (passwordVisible) {
             txtSenha.setEchoChar((char) 0);
             BtnView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Open_Eye.png")));

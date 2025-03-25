@@ -13,6 +13,6 @@ public class Venda {
     private int id;
     private Date data;
     private double total;
-    enum TipoPagamento {DINHEIRO, CREDITO, DEBITO, PIX};
+    private String TipoPagamento;
     private Produto produtos;
 }

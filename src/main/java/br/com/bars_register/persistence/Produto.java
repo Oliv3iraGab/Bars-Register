@@ -14,6 +14,7 @@ public class Produto {
     private String nome;
     private double preco;
     private int estoque;
+    private String acoes;
 
     public void atualizarEstoque() {
 

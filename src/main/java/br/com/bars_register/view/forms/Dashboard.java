@@ -1,8 +1,9 @@
-
-package br.com.bars_register.forms;
+package br.com.bars_register.view.forms;
 
 import br.com.bars_register.util.View;
-
+import br.com.bars_register.persistence.Venda;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -13,8 +14,25 @@ public class Dashboard extends javax.swing.JFrame {
     /**
      * Creates new form Dashboard
      */
+    private ArrayList<Venda> listaVendas = new ArrayList<>();
+    
     public Dashboard() {
         initComponents();
+        atualizarTabela();
+    }
+
+    private void atualizarTabela() {
+        DefaultTableModel modeloTable = (DefaultTableModel) TblVendasRecentes.getModel();
+        modeloTable.setRowCount(0);
+        
+        for (Venda venda : listaVendas){
+            Object[] rowData = {
+                venda.getData(),
+                venda.getProdutos(),
+                venda.getTotal()
+            };
+            modeloTable.addRow(rowData);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -60,7 +78,7 @@ public class Dashboard extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Data", "Total", "Produtos"
+                "Data", "Produtos", "Total"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -71,7 +89,6 @@ public class Dashboard extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        View.standardCornerRadius(TblVendasRecentes);
         TblVendasRecentes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         TblVendasRecentes.setShowGrid(false);
         ScPanelVendasRecentes.setViewportView(TblVendasRecentes);

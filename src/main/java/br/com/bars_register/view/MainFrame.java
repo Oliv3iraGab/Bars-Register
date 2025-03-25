@@ -8,9 +8,9 @@ import br.com.bars_register.util.View;
 import javax.swing.JToggleButton;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import br.com.bars_register.forms.*;
+import br.com.bars_register.view.forms.*;
 
-/**
+/**s
  *
  * @author limag
  */
@@ -71,7 +71,6 @@ public class MainFrame extends javax.swing.JFrame {
         // Remove todos os componentes do painel principal
         PanelMain.removeAll();
         
-        // Adiciona o painel selecionado
         JPanel painelSelecionado = null;
         switch (nomePainel) {
             case "Dashboard":
@@ -95,7 +94,6 @@ public class MainFrame extends javax.swing.JFrame {
         }
         
         if (painelSelecionado != null) {
-            // Configura o layout do PanelMain para BorderLayout
             PanelMain.setLayout(new BorderLayout());
             
             // Adiciona o painel selecionado ocupando todo o espaço
@@ -137,11 +135,12 @@ public class MainFrame extends javax.swing.JFrame {
         PanelMain = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         PanelLateral.setBackground(new java.awt.Color(78, 52, 46));
 
-        BtnFornecedores.setBackground(new java.awt.Color(62, 39, 35));
+        BtnFornecedores.setBackground(new java.awt.Color(93, 64, 55));
         BgLateral.add(BtnFornecedores);
         BtnFornecedores.setFont(new java.awt.Font("Inter", 0, 13)); // NOI18N
         BtnFornecedores.setForeground(new java.awt.Color(255, 255, 255));
@@ -151,7 +150,7 @@ public class MainFrame extends javax.swing.JFrame {
         BtnFornecedores.setIconTextGap(3);
         BtnFornecedores.setMargin(new java.awt.Insets(2, 6, 3, 20));
 
-        BtnDashboard.setBackground(new java.awt.Color(62, 39, 35));
+        BtnDashboard.setBackground(new java.awt.Color(93, 64, 55));
         BgLateral.add(BtnDashboard);
         BtnDashboard.setFont(new java.awt.Font("Inter", 0, 13)); // NOI18N
         BtnDashboard.setForeground(new java.awt.Color(255, 255, 255));
@@ -162,7 +161,7 @@ public class MainFrame extends javax.swing.JFrame {
         BtnDashboard.setIconTextGap(3);
         BtnDashboard.setMargin(new java.awt.Insets(2, 6, 3, 20));
 
-        BtnProdutos.setBackground(new java.awt.Color(62, 39, 35));
+        BtnProdutos.setBackground(new java.awt.Color(93, 64, 55));
         BgLateral.add(BtnProdutos);
         BtnProdutos.setFont(new java.awt.Font("Inter", 0, 13)); // NOI18N
         BtnProdutos.setForeground(new java.awt.Color(255, 255, 255));
@@ -172,7 +171,7 @@ public class MainFrame extends javax.swing.JFrame {
         BtnProdutos.setIconTextGap(3);
         BtnProdutos.setMargin(new java.awt.Insets(2, 6, 3, 20));
 
-        BtnVendas.setBackground(new java.awt.Color(62, 39, 35));
+        BtnVendas.setBackground(new java.awt.Color(93, 64, 55));
         BgLateral.add(BtnVendas);
         BtnVendas.setFont(new java.awt.Font("Inter", 0, 13)); // NOI18N
         BtnVendas.setForeground(new java.awt.Color(255, 255, 255));
@@ -185,8 +184,13 @@ public class MainFrame extends javax.swing.JFrame {
         btnVoltar.setBackground(new java.awt.Color(78, 52, 46));
         btnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/IconeVoltar.png"))); // NOI18N
         btnVoltar.setBorder(null);
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
 
-        BtnRelatorios.setBackground(new java.awt.Color(62, 39, 35));
+        BtnRelatorios.setBackground(new java.awt.Color(93, 64, 55));
         BgLateral.add(BtnRelatorios);
         BtnRelatorios.setFont(new java.awt.Font("Inter", 0, 13)); // NOI18N
         BtnRelatorios.setForeground(new java.awt.Color(255, 255, 255));
@@ -196,7 +200,7 @@ public class MainFrame extends javax.swing.JFrame {
         BtnRelatorios.setIconTextGap(3);
         BtnRelatorios.setMargin(new java.awt.Insets(2, 6, 3, 20));
 
-        BtnUsuarios.setBackground(new java.awt.Color(62, 39, 35));
+        BtnUsuarios.setBackground(new java.awt.Color(93, 64, 55));
         BgLateral.add(BtnUsuarios);
         BtnUsuarios.setFont(new java.awt.Font("Inter", 0, 13)); // NOI18N
         BtnUsuarios.setForeground(new java.awt.Color(255, 255, 255));
@@ -283,6 +287,13 @@ public class MainFrame extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        Login login = new Login();
+        login.setVisible(true);
+    }//GEN-LAST:event_btnVoltarActionPerformed
 
     /**
      * @param args the command line arguments

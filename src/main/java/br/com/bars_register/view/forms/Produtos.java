@@ -2,9 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package br.com.bars_register.forms;
+package br.com.bars_register.view.forms;
 
 import br.com.bars_register.util.View;
+import br.com.bars_register.view.RegistroProdutos;
+import com.formdev.flatlaf.FlatClientProperties;
 
 /**
  *
@@ -17,6 +19,7 @@ public class Produtos extends javax.swing.JFrame {
      */
     public Produtos() {
         initComponents();
+        txtBuscaProduto.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Busque um produto");
     }
 
     /**
@@ -40,6 +43,7 @@ public class Produtos extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         PanelMain.setBackground(new java.awt.Color(233, 236, 239));
+        PanelMain.setPreferredSize(new java.awt.Dimension(670, 540));
         PanelMain.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         PanelFundo.setBackground(new java.awt.Color(255, 255, 255));
@@ -55,6 +59,11 @@ public class Produtos extends javax.swing.JFrame {
         BtnNovoProduto.setForeground(new java.awt.Color(255, 255, 255));
         BtnNovoProduto.setText("+Novo Produto");
         BtnNovoProduto.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnNovoProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnNovoProdutoActionPerformed(evt);
+            }
+        });
         PanelFundo.add(BtnNovoProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 20, 120, 40));
         View.standardCornerRadius(BtnNovoProduto);
 
@@ -106,6 +115,12 @@ public class Produtos extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BtnNovoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNovoProdutoActionPerformed
+        RegistroProdutos registroProdutos = new RegistroProdutos();
+        registroProdutos.setVisible(true);
+        
+    }//GEN-LAST:event_BtnNovoProdutoActionPerformed
 
     /**
      * @param args the command line arguments

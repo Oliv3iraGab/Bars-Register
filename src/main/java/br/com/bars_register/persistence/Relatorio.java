@@ -15,7 +15,7 @@ public class Relatorio {
     private Usuario gerador;
     private double totalVendas;
     private int quantidadeVendas;
-    private Map<Venda.TipoPagamento, Double> vendasPorTipo;
+    private Map<String, Double> vendasPorTipo;
     
     
     public double getTicketMedio() {

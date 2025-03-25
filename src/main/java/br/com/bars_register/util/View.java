@@ -5,7 +5,6 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.JTable;
 
 /**
  *
@@ -38,8 +37,4 @@ public class View {
                 "arc: 15");
     }
 
-    public static void standardCornerRadius(JTable table) {
-        table.putClientProperty("FlatLaf.style",
-                "arc: 15");
-    }
 }
