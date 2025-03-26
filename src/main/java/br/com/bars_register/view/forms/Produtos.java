@@ -9,6 +9,9 @@ import br.com.bars_register.util.View;
 import br.com.bars_register.view.RegistroProdutos;
 import com.formdev.flatlaf.FlatClientProperties;
 import java.util.ArrayList;
+import java.util.Iterator;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -26,7 +29,7 @@ public class Produtos extends javax.swing.JFrame {
         initComponents();
         atualizarTabelaProdutos();
         txtBuscaProduto.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Busque um produto");
-        
+
         addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowActivated(java.awt.event.WindowEvent evt) {
@@ -42,7 +45,7 @@ public class Produtos extends javax.swing.JFrame {
         for (Produto produto : listaProdutos) {
             Object[] rowData = {
                 produto.getNome(),
-                produto.getPreco(),
+                "R$ " + produto.getPreco(),
                 produto.getEstoque(),
                 produto.getAcoes()
             };
@@ -125,6 +128,11 @@ public class Produtos extends javax.swing.JFrame {
         BtnExcluir.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         BtnExcluir.setForeground(new java.awt.Color(255, 0, 0));
         BtnExcluir.setText("Excluir");
+        BtnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnExcluirActionPerformed(evt);
+            }
+        });
         PanelMain.add(BtnExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 495, 120, 40));
         View.standardCornerRadius(BtnExcluir);
 
@@ -154,6 +162,34 @@ public class Produtos extends javax.swing.JFrame {
         registroProdutos.setVisible(true);
 
     }//GEN-LAST:event_BtnNovoProdutoActionPerformed
+
+    private void BtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnExcluirActionPerformed
+        if (TblProdutos.getSelectedRow() != -1){
+            try{
+                deletarConsulta(TblProdutos);
+                atualizarTabelaProdutos();
+            } catch (Exception e){
+                JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_BtnExcluirActionPerformed
+
+    private Produto deletarConsulta(JTable tabela) {
+        int rowSelecionada = TblProdutos.getSelectedRow();
+
+        String nomeComparacao = tabela.getValueAt(rowSelecionada, 1).toString();
+
+        Iterator<Produto> iterador = listaProdutos.listIterator();
+        while (iterador.hasNext()) {
+            Produto produto = iterador.next();
+            if (produto.getNome().equals(nomeComparacao)) {
+                JOptionPane.showMessageDialog(null, "Produto: " + produto.getNome() + " excluido com suceso!", "Confirmação", JOptionPane.INFORMATION_MESSAGE);
+                iterador.remove();
+                break;
+            }
+        }
+        return null;
+    }
 
     /**
      * @param args the command line arguments

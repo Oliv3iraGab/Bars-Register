@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
 public class Vendas extends javax.swing.JFrame {
 
@@ -29,6 +30,14 @@ public class Vendas extends javax.swing.JFrame {
         initComponents();
         txtBuscaProduto.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Busque um produto");
         setupComponents();
+        listarProdutos();
+
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                listarProdutos();
+            }
+        });
     }
 
     private void setupComponents() {
@@ -39,7 +48,7 @@ public class Vendas extends javax.swing.JFrame {
         currencyFormat = new DecimalFormat("R$ #,##0.00");
 
         listarProdutos();
-        
+
         TblProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 if (evt.getClickCount() == 2) {
@@ -97,16 +106,19 @@ public class Vendas extends javax.swing.JFrame {
     }
 
     private void listarProdutos() {
-        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) TblProdutos.getModel();
-        model.setRowCount(0); // Limpa linhas existentes
-        
-        for (Produto produto : listaProdutos) {
-            Object[] row = {
-                produto.getNome(),
-                1,  // Quantidade padrão
-                produto.getPreco()
-            };
-            model.addRow(row);
+        DefaultTableModel model = (DefaultTableModel) TblProdutos.getModel();
+        model.setRowCount(0);
+        try {
+            for (Produto produto : listaProdutos) {
+                Object[] row = {
+                    produto.getNome(),
+                    1, // Quantidade padrão
+                    produto.getPreco()
+                };
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
         }
     }
 
@@ -296,19 +308,19 @@ public class Vendas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConfirmarActionPerformed
-        if (listModel.isEmpty()){
+        if (listModel.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Carrinho vazio!");
             return;
         }
-        try{
+        try {
             Venda venda = new Venda();
             venda.setData(new java.sql.Date(System.currentTimeMillis()));
             venda.setTotal(totalValue);
             String tipoPag = CbTipoPagamento.getSelectedItem().toString();
             venda.setTipoPagamento(tipoPag);
-            
+
             ArrayList<ItemVenda> itensVenda = new ArrayList<>();
-            
+
             for (int i = 0; i < listModel.size(); i++) {
                 String item = listModel.getElementAt(i);
 
@@ -316,26 +328,26 @@ public class Vendas extends javax.swing.JFrame {
                 String nomeProduto = parts[0].trim();
                 int quantidade = Integer.parseInt(parts[1].split("-")[0].trim());
                 Produto produto = listaProdutos.stream()
-                .filter(p -> p.getNome().equals(nomeProduto))
-                .findFirst()
-                .orElse(null);
-                
+                        .filter(p -> p.getNome().equals(nomeProduto))
+                        .findFirst()
+                        .orElse(null);
+
                 if (produto != null) {
                     ItemVenda itemVenda = new ItemVenda();
                     itemVenda.setId_produto(produto.getId());
                     itemVenda.setQuantidade(quantidade);
                     itensVenda.add(itemVenda);
                 }
-            // Aqui será salva a venda e adicionada ao BD
-                
-            listModel.clear();
-            totalValue = 0.0;
-            atualizarTotal();
-            
-            JOptionPane.showMessageDialog(this, "Venda registrada com sucesso!");
+                // Aqui será salva a venda e adicionada ao BD
+
+                listModel.clear();
+                totalValue = 0.0;
+                atualizarTotal();
+
+                JOptionPane.showMessageDialog(this, "Venda registrada com sucesso!");
             }
-            
-        }catch(Exception e){
+
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro:" + e.getMessage());
         }
     }//GEN-LAST:event_BtnConfirmarActionPerformed
