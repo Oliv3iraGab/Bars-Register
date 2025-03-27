@@ -10,6 +10,8 @@ import br.com.bars_register.persistence.Produto;
 import br.com.bars_register.persistence.Venda;
 import com.formdev.flatlaf.FlatClientProperties;
 import javax.swing.DefaultListModel;
+
+import java.lang.reflect.Array;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -20,34 +22,37 @@ import javax.swing.table.DefaultTableModel;
 
 public class Vendas extends javax.swing.JFrame {
 
-    // Campos necessários
     private DefaultListModel<String> listModel;
-    private ArrayList<Produto> listaProdutos = new ArrayList<>();
     private double totalValue = 0.0;
     private DecimalFormat currencyFormat;
+    private ArrayList<Produto> listaProdutos;
 
-    public Vendas() {
+    public Vendas(ArrayList<Produto> listaProdutos) {
         initComponents();
-        txtBuscaProduto.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Busque um produto");
+        this.listaProdutos = listaProdutos;
         setupComponents();
-        listarProdutos();
+    }
 
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                listarProdutos();
-            }
-        });
+    public void atualizarTabelaProdutos() {
+        DefaultTableModel modeloTable = (DefaultTableModel) TblProdutos.getModel();
+        modeloTable.setRowCount(0);
+
+        for (Produto produto : listaProdutos) {
+            Object[] rowData = {
+                produto.getNome(),
+                1,
+                "R$ " + produto.getPreco()
+            };
+            modeloTable.addRow(rowData);
+        }
     }
 
     private void setupComponents() {
         listModel = new DefaultListModel<>();
         ListCarrinho.setModel(listModel);
-
-        // Inicializa o formatador de moeda
+        atualizarTabelaProdutos();
+        txtBuscaProduto.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Busque um produto");
         currencyFormat = new DecimalFormat("R$ #,##0.00");
-
-        listarProdutos();
 
         TblProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -57,7 +62,6 @@ public class Vendas extends javax.swing.JFrame {
             }
         });
 
-        // Adiciona listener de tecla delete na lista
         ListCarrinho.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_DELETE) {
@@ -72,7 +76,8 @@ public class Vendas extends javax.swing.JFrame {
         if (row != -1) {
             String nome = (String) TblProdutos.getValueAt(row, 0);
             int quantidade = Integer.parseInt(TblProdutos.getValueAt(row, 1).toString());
-            double preco = Double.parseDouble(TblProdutos.getValueAt(row, 2).toString());
+            String precoStr = TblProdutos.getValueAt(row, 2).toString().replace("R$ ", "");
+            double preco = Double.parseDouble(precoStr);
 
             String item = String.format("%s x%d - %s", nome, quantidade,
                     currencyFormat.format(preco * quantidade));
@@ -103,23 +108,6 @@ public class Vendas extends javax.swing.JFrame {
 
     private void atualizarTotal() {
         LbTotalNumero.setText(currencyFormat.format(totalValue));
-    }
-
-    private void listarProdutos() {
-        DefaultTableModel model = (DefaultTableModel) TblProdutos.getModel();
-        model.setRowCount(0);
-        try {
-            for (Produto produto : listaProdutos) {
-                Object[] row = {
-                    produto.getNome(),
-                    1, // Quantidade padrão
-                    produto.getPreco()
-                };
-                model.addRow(row);
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
-        }
     }
 
     /**
@@ -382,7 +370,8 @@ public class Vendas extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Vendas().setVisible(true);
+                ArrayList<Produto> listaProdutos = new ArrayList<>();
+                new Vendas(listaProdutos).setVisible(true);
             }
         });
     }

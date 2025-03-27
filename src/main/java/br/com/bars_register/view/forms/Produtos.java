@@ -29,13 +29,6 @@ public class Produtos extends javax.swing.JFrame {
         initComponents();
         atualizarTabelaProdutos();
         txtBuscaProduto.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Busque um produto");
-
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                atualizarTabelaProdutos();
-            }
-        });
     }
 
     private void atualizarTabelaProdutos() {
@@ -58,6 +51,9 @@ public class Produtos extends javax.swing.JFrame {
         atualizarTabelaProdutos();
     }
 
+    public ArrayList<Produto> getListaProdutos() {
+        return listaProdutos;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -166,24 +162,25 @@ public class Produtos extends javax.swing.JFrame {
     private void BtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnExcluirActionPerformed
         if (TblProdutos.getSelectedRow() != -1){
             try{
-                deletarConsulta(TblProdutos);
+                deletarProduto(TblProdutos);
                 atualizarTabelaProdutos();
+                JOptionPane.showMessageDialog(this, "Produto Deletado!");
             } catch (Exception e){
                 JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
             }
         }
     }//GEN-LAST:event_BtnExcluirActionPerformed
 
-    private Produto deletarConsulta(JTable tabela) {
+    private Produto deletarProduto(JTable tabela) {
         int rowSelecionada = TblProdutos.getSelectedRow();
 
-        String nomeComparacao = tabela.getValueAt(rowSelecionada, 1).toString();
+        String nomeComparacao = tabela.getValueAt(rowSelecionada, 0).toString();
 
         Iterator<Produto> iterador = listaProdutos.listIterator();
         while (iterador.hasNext()) {
             Produto produto = iterador.next();
             if (produto.getNome().equals(nomeComparacao)) {
-                JOptionPane.showMessageDialog(null, "Produto: " + produto.getNome() + " excluido com suceso!", "Confirmação", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Produto: " + produto.getNome() + " excluido com suceso!", "Confirmação", JOptionPane.INFORMATION_MESSAGE);
                 iterador.remove();
                 break;
             }

@@ -4,10 +4,13 @@
  */
 package br.com.bars_register.view;
 
+import br.com.bars_register.persistence.Produto;
 import br.com.bars_register.util.View;
 import javax.swing.JToggleButton;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.util.ArrayList;
+
 import br.com.bars_register.view.forms.*;
 
 /**s
@@ -50,18 +53,19 @@ public class MainFrame extends javax.swing.JFrame {
     }
     
     private void inicializarPaineis() {
-        // Cria as instâncias dos painéis
+        // Cria as instâncias dos painéis na ordem correta
         dashboardPanel = new Dashboard();
-        vendasPanel = new Vendas();
         produtosPanel = new Produtos();
+        ArrayList<Produto> listaProdutos = ((Produtos)produtosPanel).getListaProdutos();
+        vendasPanel = new Vendas(listaProdutos);
         usuariosPanel = new Usuarios();
         fornecedoresPanel = new Fornecedores();
         relatorioPanel = new Relatorio();
         
         // Converte os JFrames para JPanels e armazena seus painéis principais
         dashboardPanel.setContentPane((JPanel)dashboardPanel.getContentPane());
-        vendasPanel.setContentPane((JPanel)vendasPanel.getContentPane());
         produtosPanel.setContentPane((JPanel)produtosPanel.getContentPane());
+        vendasPanel.setContentPane((JPanel)vendasPanel.getContentPane());
         usuariosPanel.setContentPane((JPanel)usuariosPanel.getContentPane());
         fornecedoresPanel.setContentPane((JPanel)fornecedoresPanel.getContentPane());
         relatorioPanel.setContentPane((JPanel)relatorioPanel.getContentPane());
@@ -80,6 +84,7 @@ public class MainFrame extends javax.swing.JFrame {
                 painelSelecionado = (JPanel)produtosPanel.getContentPane();
                 break;
             case "Vendas":
+                vendasPanel.atualizarTabelaProdutos();
                 painelSelecionado = (JPanel)vendasPanel.getContentPane();
                 break;
             case "Usuarios":
