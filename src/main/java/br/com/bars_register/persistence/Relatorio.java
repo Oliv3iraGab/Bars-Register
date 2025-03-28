@@ -38,7 +38,6 @@ public class Relatorio {
         
         sb.append("----------------------------------------\n");
         sb.append(String.format("Gerado por: %s\n", gerador.getNome()));
-        sb.append(String.format("Cargo: %s\n", gerador.getTipo()));
         sb.append(String.format("Data: %s", dataGeracao));
         
         return sb.toString();

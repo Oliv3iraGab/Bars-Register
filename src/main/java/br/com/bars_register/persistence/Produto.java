@@ -15,8 +15,4 @@ public class Produto {
     private double preco;
     private int estoque;
     private String acoes;
-
-    public void atualizarEstoque() {
-
-    }
 }

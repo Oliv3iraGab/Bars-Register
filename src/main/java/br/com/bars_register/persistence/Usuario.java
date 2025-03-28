@@ -8,12 +8,12 @@ import lombok.NoArgsConstructor;
 @Setter
 @NoArgsConstructor
 public class Usuario {
+
     private int id;
     private String nome;
+    private String tipoUsuario;
     private String email;
-    private String tipo;
-
-    public boolean autenticar() {
-        return false;
-    }
+    private boolean status;
+    private String login;
+    private String senha;
 }
