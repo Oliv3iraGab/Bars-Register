@@ -10,8 +10,6 @@ import java.util.Map;
 public class Relatorio {
     private int id;
     private static final LocalDateTime dataGeracao = LocalDateTime.now();
-    private LocalDateTime dataInicial;
-    private LocalDateTime dataFinal;
     private Usuario gerador;
     private double totalVendas;
     private int quantidadeVendas;
@@ -22,7 +20,7 @@ public class Relatorio {
         return quantidadeVendas > 0 ? totalVendas / quantidadeVendas : 0;
     }
     
-    public String gerarRelatorioFormatado() {
+    public String gerarRelatorioFormatado(LocalDateTime dataInicial, LocalDateTime dataFinal) {
         StringBuilder sb = new StringBuilder();
         sb.append("BAR'S REGISTER - RELATÓRIO FINANCEIRO\n");
         sb.append(String.format("Período: %s - %s\n\n", dataInicial, dataFinal));

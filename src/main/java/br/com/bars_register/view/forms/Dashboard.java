@@ -27,7 +27,7 @@ public class Dashboard extends javax.swing.JFrame {
         
         for (Venda venda : listaVendas){
             Object[] rowData = {
-                venda.getData(),
+                venda.getDataVenda(),
                 venda.getProdutos(),
                 venda.getTotal()
             };

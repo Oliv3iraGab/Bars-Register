@@ -302,7 +302,7 @@ public class Vendas extends javax.swing.JFrame {
         }
         try {
             Venda venda = new Venda();
-            venda.setData(new java.sql.Date(System.currentTimeMillis()));
+            venda.setDataVenda(java.time.LocalDateTime.now());
             venda.setTotal(totalValue);
             String tipoPag = CbTipoPagamento.getSelectedItem().toString();
             venda.setTipoPagamento(tipoPag);
@@ -322,7 +322,7 @@ public class Vendas extends javax.swing.JFrame {
 
                 if (produto != null) {
                     ItemVenda itemVenda = new ItemVenda();
-                    itemVenda.setId_produto(produto.getId());
+                    itemVenda.setProduto_id(produto.getId());
                     itemVenda.setQuantidade(quantidade);
                     itensVenda.add(itemVenda);
                 }

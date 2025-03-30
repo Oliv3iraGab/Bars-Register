@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class ItemVenda {
-    private int id_venda;
-    private int id_produto;
+    private int venda_id;
+    private int produto_id;
     private int quantidade;
 }
