@@ -3,12 +3,12 @@ CREATE DATABASE IF NOT EXISTS bars_register;
 USE bars_register;
 
 DROP TABLE IF EXISTS itemVenda;
-DROP TABLE IF EXISTS venda;
-DROP TABLE IF EXISTS produto;
-DROP TABLE IF EXISTS fornecedor;
-DROP TABLE IF EXISTS usuario;
+DROP TABLE IF EXISTS vendas;
+DROP TABLE IF EXISTS produtos;
+DROP TABLE IF EXISTS fornecedores;
+DROP TABLE IF EXISTS usuarios;
 
-CREATE TABLE usuario (
+CREATE TABLE usuarios (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     tipo_usuario ENUM ('ADMINISTRADOR', 'FUNCIONARIO') NOT NULL,
@@ -18,14 +18,15 @@ CREATE TABLE usuario (
     senha TEXT NOT NULL
 );
 
-CREATE TABLE fornecedor (
+CREATE TABLE fornecedores (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(60) NOT NULL,
     contato VARCHAR(45) NOT NULL,
+    endereco VARCHAR(255) NOT NULL,
     cnpj VARCHAR(18) NOT NULL UNIQUE
 );
 
-CREATE TABLE produto (
+CREATE TABLE produtos (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(45) NOT NULL,
     preco DECIMAL(10,2) NOT NULL,
@@ -33,7 +34,7 @@ CREATE TABLE produto (
     acoes VARCHAR(100)
 );
 
-CREATE TABLE venda (
+CREATE TABLE vendas (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     dataVenda DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     total DECIMAL(10,2) NOT NULL,
@@ -46,15 +47,15 @@ CREATE TABLE itemVenda (
     quantidade INT NOT NULL,
 
     PRIMARY KEY (venda_id, produto_id),
-    FOREIGN KEY (venda_id) REFERENCES venda(id)
+    FOREIGN KEY (venda_id) REFERENCES vendas(id)
         ON DELETE CASCADE
         ON UPDATE CASCADE,
-    FOREIGN KEY (produto_id) REFERENCES produto(id)
+    FOREIGN KEY (produto_id) REFERENCES produtos(id)
         ON DELETE RESTRICT
         ON UPDATE CASCADE
 );
 
-CREATE INDEX idx_produto_nome ON produto(nome);
-CREATE INDEX idx_fornecedor_cnpj ON fornecedor(cnpj);
-CREATE INDEX idx_usuario_login ON usuario(login);
-CREATE INDEX idx_venda_data ON venda(dataVenda);
+CREATE INDEX idx_produto_nome ON produtos(nome);
+CREATE INDEX idx_fornecedor_cnpj ON fornecedores(cnpj);
+CREATE INDEX idx_usuario_login ON usuarios(login);
+CREATE INDEX idx_venda_data ON vendas(dataVenda);
