@@ -4,6 +4,9 @@
  */
 package br.com.bars_register.view.forms;
 
+import br.com.bars_register.DAOClasses.ItemVendaDAO;
+import br.com.bars_register.DAOClasses.ProdutoDAO;
+import br.com.bars_register.DAOClasses.VendaDAO;
 import br.com.bars_register.persistence.ItemVenda;
 import br.com.bars_register.util.View;
 import br.com.bars_register.persistence.Produto;
@@ -15,6 +18,8 @@ import java.lang.reflect.Array;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -25,15 +30,18 @@ public class Vendas extends javax.swing.JFrame {
     private DefaultListModel<String> listModel;
     private double totalValue = 0.0;
     private DecimalFormat currencyFormat;
-    private ArrayList<Produto> listaProdutos;
 
-    public Vendas(ArrayList<Produto> listaProdutos) {
+    public Vendas() {
         initComponents();
-        this.listaProdutos = listaProdutos;
         setupComponents();
     }
 
-    public void atualizarTabelaProdutos() {
+    public void atualizarTabelaRegistroProdutos() {
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+        String nomeProduto = txtBuscaProduto.getText();
+
+        List<Produto> listaProdutos = produtoDAO.listarProdutos(nomeProduto);
+
         DefaultTableModel modeloTable = (DefaultTableModel) TblProdutos.getModel();
         modeloTable.setRowCount(0);
 
@@ -50,7 +58,7 @@ public class Vendas extends javax.swing.JFrame {
     private void setupComponents() {
         listModel = new DefaultListModel<>();
         ListCarrinho.setModel(listModel);
-        atualizarTabelaProdutos();
+        atualizarTabelaRegistroProdutos();
         txtBuscaProduto.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Busque um produto");
         currencyFormat = new DecimalFormat("R$ #,##0.00");
 
@@ -295,19 +303,23 @@ public class Vendas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConfirmarActionPerformed
+    private void BtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {
         if (listModel.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Carrinho vazio!");
             return;
         }
         try {
+            ProdutoDAO produtoDAO = new ProdutoDAO();
+            VendaDAO vendaDAO = new VendaDAO();
+            ArrayList<ItemVenda> itensVenda = new ArrayList<>();
+            
             Venda venda = new Venda();
             venda.setDataVenda(java.time.LocalDateTime.now());
             venda.setTotal(totalValue);
             String tipoPag = CbTipoPagamento.getSelectedItem().toString();
             venda.setTipoPagamento(tipoPag);
-
-            ArrayList<ItemVenda> itensVenda = new ArrayList<>();
+            
+            vendaDAO.salvarVenda(venda);
 
             for (int i = 0; i < listModel.size(); i++) {
                 String item = listModel.getElementAt(i);
@@ -315,30 +327,36 @@ public class Vendas extends javax.swing.JFrame {
                 String[] parts = item.split("x");
                 String nomeProduto = parts[0].trim();
                 int quantidade = Integer.parseInt(parts[1].split("-")[0].trim());
-                Produto produto = listaProdutos.stream()
+                
+                Produto produto = produtoDAO.listarProdutos("").stream()
                         .filter(p -> p.getNome().equals(nomeProduto))
                         .findFirst()
                         .orElse(null);
 
                 if (produto != null) {
                     ItemVenda itemVenda = new ItemVenda();
-                    itemVenda.setProduto_id(produto.getId());
+                    itemVenda.setProduto(produto);
+                    itemVenda.setVenda(venda);
                     itemVenda.setQuantidade(quantidade);
                     itensVenda.add(itemVenda);
                 }
-                // Aqui será salva a venda e adicionada ao BD
-
-                listModel.clear();
-                totalValue = 0.0;
-                atualizarTotal();
-
-                JOptionPane.showMessageDialog(this, "Venda registrada com sucesso!");
             }
+            
+            ItemVendaDAO itemVendaDAO = new ItemVendaDAO();
+            for (ItemVenda item : itensVenda) {
+                itemVendaDAO.cadastrarItemVenda(item);
+            }
+
+            listModel.clear();
+            totalValue = 0.0;
+            atualizarTotal();
+
+            JOptionPane.showMessageDialog(this, "Venda registrada com sucesso!");
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro:" + e.getMessage());
         }
-    }//GEN-LAST:event_BtnConfirmarActionPerformed
+    }
 
     /**
      * @param args the command line arguments
@@ -370,8 +388,7 @@ public class Vendas extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ArrayList<Produto> listaProdutos = new ArrayList<>();
-                new Vendas(listaProdutos).setVisible(true);
+                new Vendas().setVisible(true);
             }
         });
     }

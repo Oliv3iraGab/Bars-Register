@@ -56,8 +56,7 @@ public class MainFrame extends javax.swing.JFrame {
         // Cria as instâncias dos painéis na ordem correta
         dashboardPanel = new Dashboard();
         produtosPanel = new Produtos();
-        ArrayList<Produto> listaProdutos = ((Produtos)produtosPanel).getListaProdutos();
-        vendasPanel = new Vendas(listaProdutos);
+        vendasPanel = new Vendas();
         usuariosPanel = new Usuarios();
         fornecedoresPanel = new Fornecedores();
         relatorioPanel = new Relatorio();
@@ -81,10 +80,11 @@ public class MainFrame extends javax.swing.JFrame {
                 painelSelecionado = (JPanel)dashboardPanel.getContentPane();
                 break;
             case "Produtos":
+                produtosPanel.atualizarTabelaProdutos();
                 painelSelecionado = (JPanel)produtosPanel.getContentPane();
                 break;
             case "Vendas":
-                vendasPanel.atualizarTabelaProdutos();
+                vendasPanel.atualizarTabelaRegistroProdutos();
                 painelSelecionado = (JPanel)vendasPanel.getContentPane();
                 break;
             case "Usuarios":

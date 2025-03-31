@@ -4,6 +4,7 @@
  */
 package br.com.bars_register.view;
 
+import br.com.bars_register.DAOClasses.ProdutoDAO;
 import br.com.bars_register.persistence.Produto;
 import br.com.bars_register.util.View;
 import br.com.bars_register.view.forms.Produtos;
@@ -191,6 +192,7 @@ public class RegistroProdutos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Preencha todos os campos!");
         } else {
             try {
+                ProdutoDAO dao = new ProdutoDAO();
                 double precoConvertido = Double.parseDouble(preco);
                 int estoqueConvertido = Integer.parseInt(estoque);
 
@@ -200,10 +202,11 @@ public class RegistroProdutos extends javax.swing.JFrame {
                 produto.setEstoque(estoqueConvertido);
                 produto.setAcoes(acoes);
 
-                JOptionPane.showMessageDialog(this, "Produto registrado!");
-                produtosFrame.adicionarProduto(produto);
-                this.dispose();
+                dao.cadastrarProduto(produto);
 
+                JOptionPane.showMessageDialog(this, "Produto registrado!");
+                produtosFrame.atualizarTabelaProdutos();
+                this.dispose();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
             }

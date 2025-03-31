@@ -4,12 +4,15 @@
  */
 package br.com.bars_register.view.forms;
 
+import br.com.bars_register.DAOClasses.ProdutoDAO;
 import br.com.bars_register.persistence.Produto;
 import br.com.bars_register.util.View;
 import br.com.bars_register.view.RegistroProdutos;
 import com.formdev.flatlaf.FlatClientProperties;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -20,7 +23,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Produtos extends javax.swing.JFrame {
 
-    private ArrayList<Produto> listaProdutos = new ArrayList<>();
 
     /**
      * Creates new form Produtos
@@ -31,7 +33,12 @@ public class Produtos extends javax.swing.JFrame {
         txtBuscaProduto.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Busque um produto");
     }
 
-    private void atualizarTabelaProdutos() {
+    public void atualizarTabelaProdutos() {
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+        String nomeProduto = txtBuscaProduto.getText();
+
+        List<Produto> listaProdutos = produtoDAO.listarProdutos(nomeProduto);
+
         DefaultTableModel modeloTable = (DefaultTableModel) TblProdutos.getModel();
         modeloTable.setRowCount(0);
 
@@ -46,14 +53,6 @@ public class Produtos extends javax.swing.JFrame {
         }
     }
 
-    public void adicionarProduto(Produto produto) {
-        listaProdutos.add(produto);
-        atualizarTabelaProdutos();
-    }
-
-    public ArrayList<Produto> getListaProdutos() {
-        return listaProdutos;
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -175,16 +174,6 @@ public class Produtos extends javax.swing.JFrame {
         int rowSelecionada = TblProdutos.getSelectedRow();
 
         String nomeComparacao = tabela.getValueAt(rowSelecionada, 0).toString();
-
-        Iterator<Produto> iterador = listaProdutos.listIterator();
-        while (iterador.hasNext()) {
-            Produto produto = iterador.next();
-            if (produto.getNome().equals(nomeComparacao)) {
-                JOptionPane.showMessageDialog(this, "Produto: " + produto.getNome() + " excluido com suceso!", "Confirmação", JOptionPane.INFORMATION_MESSAGE);
-                iterador.remove();
-                break;
-            }
-        }
         return null;
     }
 

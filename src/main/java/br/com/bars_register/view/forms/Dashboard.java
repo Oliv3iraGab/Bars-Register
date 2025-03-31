@@ -1,8 +1,9 @@
 package br.com.bars_register.view.forms;
 
 import br.com.bars_register.util.View;
+import br.com.bars_register.DAOClasses.VendaDAO;
 import br.com.bars_register.persistence.Venda;
-import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -14,22 +15,24 @@ public class Dashboard extends javax.swing.JFrame {
     /**
      * Creates new form Dashboard
      */
-    private ArrayList<Venda> listaVendas = new ArrayList<>();
     
     public Dashboard() {
         initComponents();
-        atualizarTabela();
+        atualizarTabelaVendas();
     }
 
-    private void atualizarTabela() {
+    private void atualizarTabelaVendas() {
+        VendaDAO vendaDAO = new VendaDAO();
+        List <Venda> listaVendas = vendaDAO.listarVendas();
+
         DefaultTableModel modeloTable = (DefaultTableModel) TblVendasRecentes.getModel();
         modeloTable.setRowCount(0);
         
         for (Venda venda : listaVendas){
             Object[] rowData = {
                 venda.getDataVenda(),
-                venda.getProdutos(),
-                venda.getTotal()
+                venda.getTotal(),
+                venda.getTipoPagamento()
             };
             modeloTable.addRow(rowData);
         }
