@@ -7,7 +7,7 @@ package br.com.bars_register.view.forms;
 import br.com.bars_register.DAOClasses.ProdutoDAO;
 import br.com.bars_register.persistence.Produto;
 import br.com.bars_register.util.View;
-import br.com.bars_register.view.RegistroProdutos;
+import br.com.bars_register.view.register.RegistroProdutos;
 import com.formdev.flatlaf.FlatClientProperties;
 import java.util.ArrayList;
 import java.util.Iterator;

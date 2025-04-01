@@ -91,6 +91,7 @@ public class MainFrame extends javax.swing.JFrame {
                 painelSelecionado = (JPanel)usuariosPanel.getContentPane();
                 break;
             case "Fornecedores":
+                fornecedoresPanel.atualizarTabelaFornecedores();
                 painelSelecionado = (JPanel)fornecedoresPanel.getContentPane();
                 break;
             case "Relatorios":

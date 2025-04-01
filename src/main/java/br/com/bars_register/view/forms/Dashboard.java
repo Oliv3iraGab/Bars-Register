@@ -31,7 +31,7 @@ public class Dashboard extends javax.swing.JFrame {
         for (Venda venda : listaVendas){
             Object[] rowData = {
                 venda.getDataVenda(),
-                venda.getTotal(),
+                "R$ " + venda.getTotal(),
                 venda.getTipoPagamento()
             };
             modeloTable.addRow(rowData);
@@ -81,7 +81,7 @@ public class Dashboard extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Data", "Produtos", "Total"
+                "Data", "Total", "Foma Pagamento"
             }
         ) {
             boolean[] canEdit = new boolean [] {
