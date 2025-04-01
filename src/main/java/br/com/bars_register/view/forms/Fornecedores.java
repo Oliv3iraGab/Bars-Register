@@ -4,8 +4,13 @@
  */
 package br.com.bars_register.view.forms;
 
+import br.com.bars_register.DAOClasses.FornecedorDAO;
+import br.com.bars_register.persistence.Fornecedor;
 import br.com.bars_register.util.View;
+import br.com.bars_register.view.register.RegistroFornecedores;
 import com.formdev.flatlaf.FlatClientProperties;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -19,6 +24,26 @@ public class Fornecedores extends javax.swing.JFrame {
     public Fornecedores() {
         initComponents();
         txtBuscaFornecedor.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Busque um Fornecedor");
+        atualizarTabelaFornecedores();
+    }
+    
+        public void atualizarTabelaFornecedores() {
+        FornecedorDAO dao = new FornecedorDAO();
+        String nome = txtBuscaFornecedor.getText();
+        List <Fornecedor> listaFornecedores = dao.listarFornecedores(nome);
+
+        DefaultTableModel modeloTable = (DefaultTableModel) TblFornecedores.getModel();
+        modeloTable.setRowCount(0);
+        
+        for (Fornecedor fornecedor : listaFornecedores){
+            Object[] rowData = {
+                fornecedor.getNome(),
+                fornecedor.getContato(),
+                fornecedor.getEndereco(),
+                fornecedor.getCnpj()
+            };
+            modeloTable.addRow(rowData);
+        }
     }
 
     /**
@@ -38,7 +63,7 @@ public class Fornecedores extends javax.swing.JFrame {
         LbTotalFornecedores = new javax.swing.JLabel();
         LbTotalFornecedoresNumero = new javax.swing.JLabel();
         JsPanelTabelaFornecedores = new javax.swing.JScrollPane();
-        TblProdutos = new javax.swing.JTable();
+        TblFornecedores = new javax.swing.JTable();
         BtnExcluir = new javax.swing.JButton();
         BtnEditar = new javax.swing.JButton();
 
@@ -54,6 +79,11 @@ public class Fornecedores extends javax.swing.JFrame {
         BtnNovoFornecedor.setForeground(new java.awt.Color(255, 255, 255));
         BtnNovoFornecedor.setText("+Novo Fornecedor");
         View.standardCornerRadius(BtnNovoFornecedor);
+        BtnNovoFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnNovoFornecedorActionPerformed(evt);
+            }
+        });
 
         PanelTotalFornecedores.setBackground(new java.awt.Color(78, 52, 46));
         PanelTotalFornecedores.setPreferredSize(new java.awt.Dimension(180, 100));
@@ -90,20 +120,19 @@ public class Fornecedores extends javax.swing.JFrame {
 
         View.standardCornerRadius(JsPanelTabelaFornecedores);
 
-        TblProdutos.setBackground(new java.awt.Color(248, 249, 250));
-        TblProdutos.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
-        TblProdutos.setForeground(new java.awt.Color(255, 255, 255));
-        TblProdutos.setModel(new javax.swing.table.DefaultTableModel(
+        TblFornecedores.setBackground(new java.awt.Color(248, 249, 250));
+        TblFornecedores.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
+        TblFornecedores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nome", "Contato", "CNPJ"
+                "Nome", "Contato", "Endereço", "CNPJ"
             }
         ));
-        TblProdutos.setGridColor(new java.awt.Color(78, 52, 46));
-        TblProdutos.setShowGrid(false);
-        JsPanelTabelaFornecedores.setViewportView(TblProdutos);
+        TblFornecedores.setGridColor(new java.awt.Color(78, 52, 46));
+        TblFornecedores.setShowGrid(false);
+        JsPanelTabelaFornecedores.setViewportView(TblFornecedores);
 
         javax.swing.GroupLayout PanelFundoLayout = new javax.swing.GroupLayout(PanelFundo);
         PanelFundo.setLayout(PanelFundoLayout);
@@ -191,6 +220,11 @@ public class Fornecedores extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void BtnNovoFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNovoFornecedorActionPerformed
+        RegistroFornecedores registroFornecedores = new RegistroFornecedores(this);
+        registroFornecedores.setVisible(true);
+    }//GEN-LAST:event_BtnNovoFornecedorActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -236,7 +270,7 @@ public class Fornecedores extends javax.swing.JFrame {
     private javax.swing.JPanel PanelFundo;
     private javax.swing.JPanel PanelMain;
     private javax.swing.JPanel PanelTotalFornecedores;
-    private javax.swing.JTable TblProdutos;
+    private javax.swing.JTable TblFornecedores;
     private javax.swing.JTextField txtBuscaFornecedor;
     // End of variables declaration//GEN-END:variables
 }
