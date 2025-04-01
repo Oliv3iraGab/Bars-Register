@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package br.com.bars_register.view;
+package br.com.bars_register.view.register;
 
 import br.com.bars_register.DAOClasses.ProdutoDAO;
 import br.com.bars_register.persistence.Produto;
