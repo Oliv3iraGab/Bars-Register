@@ -25,17 +25,18 @@ public class Fornecedores extends javax.swing.JFrame {
         initComponents();
         txtBuscaFornecedor.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Busque um Fornecedor");
         atualizarTabelaFornecedores();
+        listnerTabela();
     }
-    
-        public void atualizarTabelaFornecedores() {
+
+    public void atualizarTabelaFornecedores() {
         FornecedorDAO dao = new FornecedorDAO();
         String nome = txtBuscaFornecedor.getText();
-        List <Fornecedor> listaFornecedores = dao.listarFornecedores(nome);
+        List<Fornecedor> listaFornecedores = dao.listarFornecedores(nome);
 
         DefaultTableModel modeloTable = (DefaultTableModel) TblFornecedores.getModel();
         modeloTable.setRowCount(0);
-        
-        for (Fornecedor fornecedor : listaFornecedores){
+
+        for (Fornecedor fornecedor : listaFornecedores) {
             Object[] rowData = {
                 fornecedor.getNome(),
                 fornecedor.getContato(),
@@ -44,6 +45,22 @@ public class Fornecedores extends javax.swing.JFrame {
             };
             modeloTable.addRow(rowData);
         }
+    }
+
+     /**
+     * Verifica se há uma row selecionada para ativar ou não o botão de excluir
+     */
+    private void listnerTabela() {
+        TblFornecedores.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                int selecionado = TblFornecedores.getSelectedRow();
+                if (selecionado != -1) {
+                    BtnExcluir.setEnabled(true);
+                } else {
+                    BtnExcluir.setEnabled(false);
+                }
+            }
+        });
     }
 
     /**
@@ -82,6 +99,12 @@ public class Fornecedores extends javax.swing.JFrame {
         BtnNovoFornecedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnNovoFornecedorActionPerformed(evt);
+            }
+        });
+
+        txtBuscaFornecedor.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtBuscaFornecedorCaretUpdate(evt);
             }
         });
 
@@ -224,6 +247,10 @@ public class Fornecedores extends javax.swing.JFrame {
         RegistroFornecedores registroFornecedores = new RegistroFornecedores(this);
         registroFornecedores.setVisible(true);
     }//GEN-LAST:event_BtnNovoFornecedorActionPerformed
+
+    private void txtBuscaFornecedorCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBuscaFornecedorCaretUpdate
+        atualizarTabelaFornecedores();
+    }//GEN-LAST:event_txtBuscaFornecedorCaretUpdate
 
     /**
      * @param args the command line arguments

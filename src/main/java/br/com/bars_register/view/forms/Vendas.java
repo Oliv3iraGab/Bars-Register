@@ -151,6 +151,11 @@ public class Vendas extends javax.swing.JFrame {
         View.standardCornerRadius(PanelFundo);
 
         View.standardCornerRadius(txtBuscaProduto);
+        txtBuscaProduto.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtBuscaProdutoCaretUpdate(evt);
+            }
+        });
 
         TblProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -303,6 +308,10 @@ public class Vendas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtBuscaProdutoCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBuscaProdutoCaretUpdate
+        atualizarTabelaRegistroProdutos();
+    }//GEN-LAST:event_txtBuscaProdutoCaretUpdate
+
     private void BtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {
         if (listModel.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Carrinho vazio!");
@@ -339,6 +348,9 @@ public class Vendas extends javax.swing.JFrame {
                     itemVenda.setVenda(venda);
                     itemVenda.setQuantidade(quantidade);
                     itensVenda.add(itemVenda);
+                    
+                    int novoEstoque = produto.getEstoque() - quantidade;
+                    produtoDAO.atualizarEstoque(nomeProduto, novoEstoque);
                 }
             }
             

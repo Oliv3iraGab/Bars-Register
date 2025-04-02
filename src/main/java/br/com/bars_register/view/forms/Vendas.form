@@ -120,6 +120,9 @@
           </Layout>
           <SubComponents>
             <Component class="javax.swing.JTextField" name="txtBuscaProduto">
+              <Events>
+                <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="txtBuscaProdutoCaretUpdate"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="View.standardCornerRadius(txtBuscaProduto);"/>
               </AuxValues>
