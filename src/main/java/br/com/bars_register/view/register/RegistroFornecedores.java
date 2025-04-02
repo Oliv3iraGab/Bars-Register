@@ -20,10 +20,17 @@ public class RegistroFornecedores extends javax.swing.JFrame {
      * Creates new form RegistroFornecedores
      */
     private Fornecedores fornecedoresFrame;
-    
+
     public RegistroFornecedores(Fornecedores fornecedoresFrame) {
         initComponents();
         this.fornecedoresFrame = fornecedoresFrame;
+    }
+
+    public void setDadosFornecedor(String nome, String contato, String endereco, String cnpj) {
+        txtNome.setText(nome);
+        txtContato.setText(contato);
+        txtEndereco.setText(endereco);
+        txtCnpj.setText(cnpj);
     }
 
     /**
@@ -177,12 +184,12 @@ public class RegistroFornecedores extends javax.swing.JFrame {
                 FornecedorDAO dao = new FornecedorDAO();
 
                 Fornecedor fornecedor = new Fornecedor();
-                
+
                 fornecedor.setNome(nome);
                 fornecedor.setContato(contato);
                 fornecedor.setEndereco(endereco);
                 fornecedor.setCnpj(cnpj);
-                
+
                 dao.salvarFornecedor(fornecedor);
 
                 JOptionPane.showMessageDialog(this, "Produto registrado!");

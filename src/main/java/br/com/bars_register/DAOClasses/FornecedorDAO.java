@@ -11,40 +11,46 @@ import jakarta.persistence.TypedQuery;
 
 public class FornecedorDAO {
     
-    public void salvarFornecedor(Fornecedor f){
-        EntityManager em = JPAUtil.getEntityManager();
+    public void salvarFornecedor(Fornecedor novoFornecedor) {
+        EntityManager em = JPAUtil.getEntityManager();      
+        
         try {
             em.getTransaction().begin();
-            em.persist(f);
-            em.getTransaction().commit();  
+            
+            String jpql = "SELECT f FROM Fornecedor f WHERE f.cnpj = :cnpj";
+            TypedQuery<Fornecedor> query = em.createQuery(jpql, Fornecedor.class);
+            query.setParameter("cnpj", novoFornecedor.getCnpj());
+            
+            try {
+                Fornecedor fornecedorExistente = query.getSingleResult();
+                fornecedorExistente.setNome(novoFornecedor.getNome());
+                fornecedorExistente.setContato(novoFornecedor.getContato());
+                fornecedorExistente.setEndereco(novoFornecedor.getEndereco());
+                fornecedorExistente.setCnpj(novoFornecedor.getCnpj());
+                em.merge(fornecedorExistente);
+            } catch (Exception e) {
+                em.persist(novoFornecedor);
+            }
+            
+            em.getTransaction().commit(); 
         } catch (Exception e) {
             em.getTransaction().rollback();
-            JOptionPane.showMessageDialog(null, "Erro ao salvar fornecedor: " + e.getMessage()); 
+            JOptionPane.showMessageDialog(null, "Erro ao salvar Fornecedor: " + e.getMessage()); 
         } finally {
             em.close();
         }
     }
 
-    public void atualizarFornecedor(Fornecedor f){
+    public void excluirFornecedor(String cnpj){
         EntityManager em = JPAUtil.getEntityManager();
         try {
             em.getTransaction().begin();
-            em.merge(f);
-            em.getTransaction().commit(); 
-        } catch (Exception e) {
-            em.getTransaction().rollback();
-            JOptionPane.showMessageDialog(null, "Erro ao atualizar fornecedor: " + e.getMessage()); 
-        } finally {
-            em.close(); 
-        }
-    }
-
-    public void excluirFornecedor(Fornecedor f){
-        EntityManager em = JPAUtil.getEntityManager();
-        try {
-            em.getTransaction().begin();
-            f = em.merge(f);
-            em.remove(f);  
+            String jpql = "SELECT f FROM Fornecedor f WHERE f.cnpj = :cnpj";
+            TypedQuery<Fornecedor> query = em.createQuery(jpql, Fornecedor.class);
+            query.setParameter("cnpj", cnpj);
+            Fornecedor f = query.getSingleResult();
+            em.remove(f);
+            em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
             JOptionPane.showMessageDialog(null, "Erro ao excluir fornecedor: " + e.getMessage()); 

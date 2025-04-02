@@ -8,21 +8,6 @@ import br.com.bars_register.persistence.Produto;
 import br.com.bars_register.util.JPAUtil;
 
 public class ProdutoDAO {
-    
-    public void  cadastrarProduto(Produto p){
-        EntityManager em = JPAUtil.getEntityManager();      
-        
-        try {
-            em.getTransaction().begin();
-            em.persist(p);
-            em.getTransaction().commit(); 
-        } catch (Exception e) {
-            em.getTransaction().rollback();
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar produto: " + e.getMessage()); 
-        } finally {
-            em.close();
-        }
-    }
 
     public void excluirProduto(String nome) {
         EntityManager em = JPAUtil.getEntityManager();
@@ -42,16 +27,30 @@ public class ProdutoDAO {
         }
     }
 
-    public void editarProduto(Produto p){
-        EntityManager em = JPAUtil.getEntityManager();
-
+    public void salvarProduto(Produto novoProduto) {
+        EntityManager em = JPAUtil.getEntityManager();      
+        
         try {
             em.getTransaction().begin();
-            em.merge(p);
-            em.getTransaction().commit();  
+            
+            String jpql = "SELECT p FROM Produto p WHERE p.nome = :nome";
+            TypedQuery<Produto> query = em.createQuery(jpql, Produto.class);
+            query.setParameter("nome", novoProduto.getNome());
+            
+            try {
+                Produto produtoExistente = query.getSingleResult();
+                produtoExistente.setPreco(novoProduto.getPreco());
+                produtoExistente.setEstoque(novoProduto.getEstoque());
+                produtoExistente.setAcoes(novoProduto.getAcoes());
+                em.merge(produtoExistente);
+            } catch (Exception e) {
+                em.persist(novoProduto);
+            }
+            
+            em.getTransaction().commit(); 
         } catch (Exception e) {
             em.getTransaction().rollback();
-            JOptionPane.showMessageDialog(null, "Erro ao editar produto: " + e.getMessage()); 
+            JOptionPane.showMessageDialog(null, "Erro ao salvar produto: " + e.getMessage()); 
         } finally {
             em.close();
         }

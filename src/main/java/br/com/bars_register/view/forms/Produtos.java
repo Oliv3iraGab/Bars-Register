@@ -9,12 +9,9 @@ import br.com.bars_register.persistence.Produto;
 import br.com.bars_register.util.View;
 import br.com.bars_register.view.register.RegistroProdutos;
 import com.formdev.flatlaf.FlatClientProperties;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -62,8 +59,10 @@ public class Produtos extends javax.swing.JFrame {
                 int selecionado = TblProdutos.getSelectedRow();
                 if (selecionado != -1) {
                     BtnExcluir.setEnabled(true);
+                    BtnEditar.setEnabled(true);
                 } else {
                     BtnExcluir.setEnabled(false);
+                    BtnEditar.setEnabled(false);
                 }
             }
         });
@@ -157,6 +156,12 @@ public class Produtos extends javax.swing.JFrame {
         BtnEditar.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         BtnEditar.setForeground(new java.awt.Color(255, 255, 255));
         BtnEditar.setText("Editar");
+        BtnEditar.setEnabled(false);
+        BtnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEditarActionPerformed(evt);
+            }
+        });
         PanelMain.add(BtnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 495, 120, 40));
         View.standardCornerRadius(BtnEditar);
 
@@ -181,7 +186,6 @@ public class Produtos extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnNovoProdutoActionPerformed
 
     private void BtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnExcluirActionPerformed
-        if (TblProdutos.getSelectedRow() != -1) {
             try {
                 ProdutoDAO dao = new ProdutoDAO();
                 int rowSelecionada = TblProdutos.getSelectedRow();
@@ -193,12 +197,23 @@ public class Produtos extends javax.swing.JFrame {
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
             }
-        }
     }//GEN-LAST:event_BtnExcluirActionPerformed
 
     private void txtBuscaProdutoCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBuscaProdutoCaretUpdate
         atualizarTabelaProdutos();
     }//GEN-LAST:event_txtBuscaProdutoCaretUpdate
+
+    private void BtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditarActionPerformed
+        RegistroProdutos registroProdutos = new RegistroProdutos(this);
+        registroProdutos.setVisible(true);
+
+            int selectedRow = TblProdutos.getSelectedRow();
+            String nome = TblProdutos.getValueAt(selectedRow, 0).toString();
+            String preco = TblProdutos.getValueAt(selectedRow, 1).toString().replace("R$ ", "");
+            String estoque = TblProdutos.getValueAt(selectedRow, 2).toString();
+            registroProdutos.setDadosProduto(nome, preco, estoque);
+    
+    }//GEN-LAST:event_BtnEditarActionPerformed
 
     /**
      * @param args the command line arguments

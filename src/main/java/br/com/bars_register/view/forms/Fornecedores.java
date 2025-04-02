@@ -47,7 +47,7 @@ public class Fornecedores extends javax.swing.JFrame {
         }
     }
 
-     /**
+    /**
      * Verifica se há uma row selecionada para ativar ou não o botão de excluir
      */
     private void listnerTabela() {
@@ -56,8 +56,10 @@ public class Fornecedores extends javax.swing.JFrame {
                 int selecionado = TblFornecedores.getSelectedRow();
                 if (selecionado != -1) {
                     BtnExcluir.setEnabled(true);
+                    BtnEditar.setEnabled(true);
                 } else {
                     BtnExcluir.setEnabled(false);
+                    BtnEditar.setEnabled(false);
                 }
             }
         });
@@ -191,13 +193,25 @@ public class Fornecedores extends javax.swing.JFrame {
         BtnExcluir.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         BtnExcluir.setForeground(new java.awt.Color(255, 0, 0));
         BtnExcluir.setText("Excluir");
+        BtnExcluir.setEnabled(false);
         View.standardCornerRadius(BtnExcluir);
+        BtnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnExcluirActionPerformed(evt);
+            }
+        });
 
         BtnEditar.setBackground(new java.awt.Color(78, 52, 46));
         BtnEditar.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         BtnEditar.setForeground(new java.awt.Color(255, 255, 255));
         BtnEditar.setText("Editar");
+        BtnEditar.setEnabled(false);
         View.standardCornerRadius(BtnEditar);
+        BtnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEditarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PanelMainLayout = new javax.swing.GroupLayout(PanelMain);
         PanelMain.setLayout(PanelMainLayout);
@@ -251,6 +265,27 @@ public class Fornecedores extends javax.swing.JFrame {
     private void txtBuscaFornecedorCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBuscaFornecedorCaretUpdate
         atualizarTabelaFornecedores();
     }//GEN-LAST:event_txtBuscaFornecedorCaretUpdate
+
+    private void BtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditarActionPerformed
+        RegistroFornecedores registroFornecedores = new RegistroFornecedores(this);
+        registroFornecedores.setVisible(true);
+
+        int selectedRow = TblFornecedores.getSelectedRow();
+        String nome = TblFornecedores.getValueAt(selectedRow, 0).toString();
+        String contato = TblFornecedores.getValueAt(selectedRow, 1).toString();
+        String endereco = TblFornecedores.getValueAt(selectedRow, 2).toString();
+        String cnpj = TblFornecedores.getValueAt(selectedRow, 3).toString();
+        
+        registroFornecedores.setDadosFornecedor(nome, contato, endereco, cnpj);
+    }//GEN-LAST:event_BtnEditarActionPerformed
+
+    private void BtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnExcluirActionPerformed
+        FornecedorDAO dao = new FornecedorDAO();
+        int rowSelecionada = TblFornecedores.getSelectedRow();
+        
+        String cnpj = TblFornecedores.getValueAt(rowSelecionada, 3).toString();
+        dao.excluirFornecedor(cnpj);
+    }//GEN-LAST:event_BtnExcluirActionPerformed
 
     /**
      * @param args the command line arguments

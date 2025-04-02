@@ -32,6 +32,12 @@ public class RegistroProdutos extends javax.swing.JFrame {
         });
     }
 
+    public void setDadosProduto(String nome, String preco, String estoque) {
+        txtNome.setText(nome);
+        txtPreco.setText(preco);
+        txtEstoque.setText(estoque);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -202,7 +208,7 @@ public class RegistroProdutos extends javax.swing.JFrame {
                 produto.setEstoque(estoqueConvertido);
                 produto.setAcoes(acoes);
 
-                dao.cadastrarProduto(produto);
+                dao.salvarProduto(produto);
 
                 JOptionPane.showMessageDialog(this, "Produto registrado!");
                 produtosFrame.atualizarTabelaProdutos();
