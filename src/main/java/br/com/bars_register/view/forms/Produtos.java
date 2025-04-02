@@ -23,7 +23,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Produtos extends javax.swing.JFrame {
 
-
     /**
      * Creates new form Produtos
      */
@@ -31,6 +30,7 @@ public class Produtos extends javax.swing.JFrame {
         initComponents();
         atualizarTabelaProdutos();
         txtBuscaProduto.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Busque um produto");
+        listnerTabela();
     }
 
     public void atualizarTabelaProdutos() {
@@ -51,6 +51,22 @@ public class Produtos extends javax.swing.JFrame {
             };
             modeloTable.addRow(rowData);
         }
+    }
+
+    /**
+     * Verifica se há uma row selecionada para ativar ou não o botão de excluir
+     */
+    private void listnerTabela() {
+        TblProdutos.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                int selecionado = TblProdutos.getSelectedRow();
+                if (selecionado != -1) {
+                    BtnExcluir.setEnabled(true);
+                } else {
+                    BtnExcluir.setEnabled(false);
+                }
+            }
+        });
     }
 
     /**
@@ -82,6 +98,11 @@ public class Produtos extends javax.swing.JFrame {
         PanelFundo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtBuscaProduto.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        txtBuscaProduto.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtBuscaProdutoCaretUpdate(evt);
+            }
+        });
         PanelFundo.add(txtBuscaProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 256, 40));
         View.standardCornerRadius(txtBuscaProduto);
 
@@ -123,6 +144,7 @@ public class Produtos extends javax.swing.JFrame {
         BtnExcluir.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         BtnExcluir.setForeground(new java.awt.Color(255, 0, 0));
         BtnExcluir.setText("Excluir");
+        BtnExcluir.setEnabled(false);
         BtnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnExcluirActionPerformed(evt);
@@ -159,23 +181,24 @@ public class Produtos extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnNovoProdutoActionPerformed
 
     private void BtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnExcluirActionPerformed
-        if (TblProdutos.getSelectedRow() != -1){
-            try{
-                deletarProduto(TblProdutos);
+        if (TblProdutos.getSelectedRow() != -1) {
+            try {
+                ProdutoDAO dao = new ProdutoDAO();
+                int rowSelecionada = TblProdutos.getSelectedRow();
+
+                String nome = TblProdutos.getValueAt(rowSelecionada, 0).toString();
+                dao.excluirProduto(nome);
                 atualizarTabelaProdutos();
-                JOptionPane.showMessageDialog(this, "Produto Deletado!");
-            } catch (Exception e){
+                JOptionPane.showMessageDialog(this, "Produto" + nome + " deletado!");
+            } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
             }
         }
     }//GEN-LAST:event_BtnExcluirActionPerformed
 
-    private Produto deletarProduto(JTable tabela) {
-        int rowSelecionada = TblProdutos.getSelectedRow();
-
-        String nomeComparacao = tabela.getValueAt(rowSelecionada, 0).toString();
-        return null;
-    }
+    private void txtBuscaProdutoCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBuscaProdutoCaretUpdate
+        atualizarTabelaProdutos();
+    }//GEN-LAST:event_txtBuscaProdutoCaretUpdate
 
     /**
      * @param args the command line arguments

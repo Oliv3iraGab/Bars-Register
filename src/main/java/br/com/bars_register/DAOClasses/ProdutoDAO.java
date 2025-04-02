@@ -24,13 +24,16 @@ public class ProdutoDAO {
         }
     }
 
-    public void excluirProduto(int id){
+    public void excluirProduto(String nome) {
         EntityManager em = JPAUtil.getEntityManager();
-        
         try {
             em.getTransaction().begin();
-            Produto p = em.find(Produto.class, id);
+            String jpql = "SELECT p FROM Produto p WHERE p.nome = :nome";
+            TypedQuery<Produto> query = em.createQuery(jpql, Produto.class);
+            query.setParameter("nome", nome);
+            Produto p = query.getSingleResult();
             em.remove(p);
+            em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
             JOptionPane.showMessageDialog(null, "Erro ao excluir produto: " + e.getMessage());
@@ -77,5 +80,24 @@ public class ProdutoDAO {
             em.close();
         }
         return produtos;
+    }
+
+    public void atualizarEstoque(String nome, int quantidade) {
+        EntityManager em = JPAUtil.getEntityManager();
+
+        try {
+            em.getTransaction().begin();
+            String jpql = "UPDATE Produto p SET p.estoque = :quantidade WHERE p.nome = :nome";
+            em.createQuery(jpql)
+                .setParameter("nome", nome)
+                .setParameter("quantidade", quantidade)
+                .executeUpdate();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar estoque: " + e.getMessage()); 
+        } finally {
+            em.close();
+        }
     }
 }
