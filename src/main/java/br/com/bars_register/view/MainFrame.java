@@ -339,10 +339,10 @@ public class MainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup BgLateral;
     private javax.swing.JToggleButton BtnDashboard;
-    private javax.swing.JToggleButton BtnFornecedores;
+    javax.swing.JToggleButton BtnFornecedores;
     private javax.swing.JToggleButton BtnProdutos;
-    private javax.swing.JToggleButton BtnRelatorios;
-    private javax.swing.JToggleButton BtnUsuarios;
+    javax.swing.JToggleButton BtnRelatorios;
+    javax.swing.JToggleButton BtnUsuarios;
     private javax.swing.JToggleButton BtnVendas;
     private javax.swing.JLabel LbLogo;
     private javax.swing.JLabel LbTitulo;

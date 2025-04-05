@@ -74,10 +74,20 @@ public class UsuarioDAO {
 
            Usuario usuario = query.getSingleResult();
            
-           if (org.mindrot.jbcrypt.BCrypt.checkpw(senha, usuario.getSenha())) {
-               return usuario;
+           try {
+               if (org.mindrot.jbcrypt.BCrypt.checkpw(senha, usuario.getSenha())) {
+                   if (!usuario.isStatus()) {
+                       JOptionPane.showMessageDialog(null, "Usuário está inativo, fale com um administrador!");
+                       return null;
+                   }
+                   return usuario;
+               }
+               JOptionPane.showMessageDialog(null, "Senha inválida!");
+               return null;
+           } catch (IllegalArgumentException e) {
+               JOptionPane.showMessageDialog(null, "Erro na verificação da senha. Entre em contato com o administrador.");
+               return null;
            }
-           throw new NoResultException("Invalid password");
 
         } catch (NoResultException e) {
            JOptionPane.showMessageDialog(null, "Usuário ou senha inválidos!");

@@ -4,8 +4,12 @@
  */
 package br.com.bars_register.view;
 
+import javax.swing.JOptionPane;
+
 import com.formdev.flatlaf.FlatClientProperties;
 
+import br.com.bars_register.DAOClasses.UsuarioDAO;
+import br.com.bars_register.persistence.Usuario;
 import br.com.bars_register.util.View;
 
 /**
@@ -115,11 +119,26 @@ public class Login extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BtnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEntrarActionPerformed
-        this.dispose();
-        MainFrame mainframe = new MainFrame();
-        mainframe.setVisible(true);
-    }//GEN-LAST:event_BtnEntrarActionPerformed
+    private void BtnEntrarActionPerformed(java.awt.event.ActionEvent evt) {
+        String login = txtLogin.getText();
+        String senha = new String(txtSenha.getPassword());
+
+        if (login.isEmpty() || senha.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
+            return;
+        }
+            Usuario usuario = UsuarioDAO.validarUsuario(login, senha);
+            if (usuario != null) {
+                MainFrame mainframe = new MainFrame();
+                if (usuario.getTipoUsuario().equals("FUNCIONARIO")) {
+                    mainframe.BtnRelatorios.setVisible(false);
+                    mainframe.BtnUsuarios.setVisible(false);
+                    mainframe.BtnFornecedores.setVisible(false);
+                }
+                mainframe.setVisible(true);
+                this.dispose();
+            }
+    }
 
     private boolean passwordVisible = false;
 
