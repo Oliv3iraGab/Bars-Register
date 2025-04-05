@@ -48,7 +48,7 @@ public class Usuarios extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nome", "Cargo", "Email", "Status"
+                "Nome", "Tipo", "Email", "Status"
             }
         ));
         JsPanelTblUsuarios.setViewportView(TblUsuarios);

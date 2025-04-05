@@ -200,7 +200,7 @@ public class Produtos extends javax.swing.JFrame {
             if (confirm == javax.swing.JOptionPane.YES_OPTION) {
                 dao.excluirProduto(nome);
                 atualizarTabelaProdutos();
-                JOptionPane.showMessageDialog(this, "Produto" + nome + " deletado!");
+                JOptionPane.showMessageDialog(this, "Produto " + nome + " deletado!");
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
