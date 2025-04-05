@@ -16,14 +16,14 @@ INSERT INTO fornecedores (nome, contato, endereco, cnpj) VALUES
 
 -- Populando a tabela produtos
 INSERT INTO produtos (nome, preco, estoque, acoes) VALUES
-('Cerveja Pilsen 600ml', 8.90, 100, 'Editar,Excluir'),
-('Refrigerante Cola 2L', 7.50, 80, 'Editar,Excluir'),
-('Água Mineral 500ml', 2.50, 150, 'Editar,Excluir'),
-('Suco Natural 500ml', 6.90, 50, 'Editar,Excluir'),
-('Energético 250ml', 9.90, 60, 'Editar,Excluir'),
-('Vodka 750ml', 45.90, 30, 'Editar,Excluir'),
-('Whisky 750ml', 89.90, 20, 'Editar,Excluir'),
-('Gin 750ml', 65.90, 25, 'Editar,Excluir');
+('Cerveja Pilsen 600ml', 8.90, 100, ''),
+('Refrigerante Cola 2L', 7.50, 80, 'Mais 20 unidades a chegar'),
+('Água Mineral 500ml', 2.50, 150, ''),
+('Suco Natural 500ml', 6.90, 50, ''),
+('Energético 250ml', 9.90, 60, ''),
+('Vodka 750ml', 45.90, 30, '5 garrafas sumiram do estoque'),
+('Whisky 750ml', 89.90, 20, ''),
+('Gin 750ml', 65.90, 25, '');
 
 -- Populando a tabela vendas
 INSERT INTO vendas (dataVenda, total, tipoPagamento) VALUES
