@@ -30,7 +30,7 @@ public class VendaDAO {
         List<Venda> vendas = null;
 
         try {
-            String jpql = "SELECT v FROM Venda v";
+            String jpql = "SELECT v FROM Venda v ORDER BY v.dataVenda DESC";
             vendas = em.createQuery(jpql, Venda.class).getResultList();
             return vendas;
         } catch (Exception e) {

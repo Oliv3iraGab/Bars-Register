@@ -36,9 +36,11 @@ public class Dashboard extends javax.swing.JFrame {
         DefaultTableModel modeloTable = (DefaultTableModel) TblVendasRecentes.getModel();
         modeloTable.setRowCount(0);
         
+        java.time.format.DateTimeFormatter formatter = java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        
         for (Venda venda : listaVendas){
             Object[] rowData = {
-                venda.getDataVenda(),
+                venda.getDataVenda().format(formatter),
                 "R$ " + venda.getTotal(),
                 venda.getTipoPagamento()
             };
@@ -74,7 +76,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         LbVendasRecentes.setBackground(new java.awt.Color(62, 39, 35));
         LbVendasRecentes.setFont(new java.awt.Font("Inter", 1, 16)); // NOI18N
-        LbVendasRecentes.setText("Vendas");
+        LbVendasRecentes.setText("Vendas Recentes");
 
         View.standardCornerRadius(ScPanelVendasRecentes);
 
