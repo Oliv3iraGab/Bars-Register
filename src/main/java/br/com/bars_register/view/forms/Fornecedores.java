@@ -279,12 +279,23 @@ public class Fornecedores extends javax.swing.JFrame {
         registroFornecedores.setDadosFornecedor(nome, contato, endereco, cnpj);
     }//GEN-LAST:event_BtnEditarActionPerformed
 
-    private void BtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnExcluirActionPerformed
-        FornecedorDAO dao = new FornecedorDAO();
+    private void BtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {
         int rowSelecionada = TblFornecedores.getSelectedRow();
-        
         String cnpj = TblFornecedores.getValueAt(rowSelecionada, 3).toString();
-        dao.excluirFornecedor(cnpj);
+        String nome = TblFornecedores.getValueAt(rowSelecionada, 0).toString();
+        
+        int confirm = javax.swing.JOptionPane.showConfirmDialog(
+            this,
+            "Deseja excluir o fornecedor " + nome + "?",
+            "Confirmar Exclusão",
+            javax.swing.JOptionPane.YES_NO_OPTION
+        );
+        
+        if (confirm == javax.swing.JOptionPane.YES_OPTION) {
+            FornecedorDAO dao = new FornecedorDAO();
+            dao.excluirFornecedor(cnpj);
+            atualizarTabelaFornecedores();
+        }
     }//GEN-LAST:event_BtnExcluirActionPerformed
 
     /**

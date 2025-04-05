@@ -192,7 +192,7 @@ public class RegistroFornecedores extends javax.swing.JFrame {
 
                 dao.salvarFornecedor(fornecedor);
 
-                JOptionPane.showMessageDialog(this, "Produto registrado!");
+                JOptionPane.showMessageDialog(this, "Fornecedor registrado!");
                 fornecedoresFrame.atualizarTabelaFornecedores();
                 this.dispose();
             } catch (Exception e) {

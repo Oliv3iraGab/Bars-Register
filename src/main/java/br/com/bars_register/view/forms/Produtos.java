@@ -186,17 +186,25 @@ public class Produtos extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnNovoProdutoActionPerformed
 
     private void BtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnExcluirActionPerformed
-            try {
-                ProdutoDAO dao = new ProdutoDAO();
-                int rowSelecionada = TblProdutos.getSelectedRow();
+        try {
+            ProdutoDAO dao = new ProdutoDAO();
+            int rowSelecionada = TblProdutos.getSelectedRow();
 
-                String nome = TblProdutos.getValueAt(rowSelecionada, 0).toString();
+            String nome = TblProdutos.getValueAt(rowSelecionada, 0).toString();
+            int confirm = javax.swing.JOptionPane.showConfirmDialog(
+                    this,
+                    "Deseja excluir o produto " + nome + "?",
+                    "Confirmar Exclusão",
+                    javax.swing.JOptionPane.YES_NO_OPTION
+            );
+            if (confirm == javax.swing.JOptionPane.YES_OPTION) {
                 dao.excluirProduto(nome);
                 atualizarTabelaProdutos();
                 JOptionPane.showMessageDialog(this, "Produto" + nome + " deletado!");
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
             }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
+        }
     }//GEN-LAST:event_BtnExcluirActionPerformed
 
     private void txtBuscaProdutoCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBuscaProdutoCaretUpdate
@@ -207,12 +215,12 @@ public class Produtos extends javax.swing.JFrame {
         RegistroProdutos registroProdutos = new RegistroProdutos(this);
         registroProdutos.setVisible(true);
 
-            int selectedRow = TblProdutos.getSelectedRow();
-            String nome = TblProdutos.getValueAt(selectedRow, 0).toString();
-            String preco = TblProdutos.getValueAt(selectedRow, 1).toString().replace("R$ ", "");
-            String estoque = TblProdutos.getValueAt(selectedRow, 2).toString();
-            registroProdutos.setDadosProduto(nome, preco, estoque);
-    
+        int selectedRow = TblProdutos.getSelectedRow();
+        String nome = TblProdutos.getValueAt(selectedRow, 0).toString();
+        String preco = TblProdutos.getValueAt(selectedRow, 1).toString().replace("R$ ", "");
+        String estoque = TblProdutos.getValueAt(selectedRow, 2).toString();
+        registroProdutos.setDadosProduto(nome, preco, estoque);
+
     }//GEN-LAST:event_BtnEditarActionPerformed
 
     /**
