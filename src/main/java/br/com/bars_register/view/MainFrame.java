@@ -4,12 +4,9 @@
  */
 package br.com.bars_register.view;
 
-import br.com.bars_register.persistence.Produto;
-import br.com.bars_register.util.View;
 import javax.swing.JToggleButton;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import java.util.ArrayList;
 
 import br.com.bars_register.view.forms.*;
 
@@ -77,6 +74,8 @@ public class MainFrame extends javax.swing.JFrame {
         JPanel painelSelecionado = null;
         switch (nomePainel) {
             case "Dashboard":
+                dashboardPanel.atualizarTabelaVendas();
+                dashboardPanel.atualizarTotalVendasHoje();
                 painelSelecionado = (JPanel)dashboardPanel.getContentPane();
                 break;
             case "Produtos":

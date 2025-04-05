@@ -6,6 +6,8 @@ import javax.swing.JOptionPane;
 import br.com.bars_register.persistence.Venda;
 import br.com.bars_register.util.JPAUtil;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
+import br.com.bars_register.persistence.ItemVenda;
 
 public class VendaDAO {
 
@@ -36,4 +38,31 @@ public class VendaDAO {
             return null;
         }
     }
+
+    public double getTotalVendasHoje() {
+        EntityManager em = JPAUtil.getEntityManager();
+        double total = 0.0;
+        
+        try {
+            java.time.LocalDateTime startOfDay = java.time.LocalDateTime.now().withHour(0).withMinute(0).withSecond(0);
+            java.time.LocalDateTime endOfDay = java.time.LocalDateTime.now().withHour(23).withMinute(59).withSecond(59);
+            
+            String jpql = "SELECT SUM(v.total) FROM Venda v WHERE v.dataVenda BETWEEN :startOfDay AND :endOfDay";
+            TypedQuery<Double> query = em.createQuery(jpql, Double.class);
+            query.setParameter("startOfDay", startOfDay);
+            query.setParameter("endOfDay", endOfDay);
+            
+            Double result = query.getSingleResult();
+            if (result != null) {
+                total = result;
+            }
+        } catch (Exception e) {
+            System.err.println("Erro ao calcular total de vendas do dia: " + e.getMessage());
+        } finally {
+            em.close();
+        }
+        
+        return total;
+    }
+
 }
