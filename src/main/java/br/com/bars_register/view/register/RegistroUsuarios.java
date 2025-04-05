@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import br.com.bars_register.DAOClasses.UsuarioDAO;
 import br.com.bars_register.persistence.Usuario;
 import br.com.bars_register.util.View;
+import br.com.bars_register.view.forms.Usuarios;
 
 /**
  *
@@ -16,11 +17,14 @@ import br.com.bars_register.util.View;
  */
 public class RegistroUsuarios extends javax.swing.JFrame {
 
+    private final Usuarios usuariosFrame;
+
     /**
      * Creates new form RegistroUsuarios
      */
-    public RegistroUsuarios() {
+    public RegistroUsuarios(Usuarios usuariosFrame) {
         initComponents();
+        this.usuariosFrame = usuariosFrame;
     }
 
     /**
@@ -45,7 +49,8 @@ public class RegistroUsuarios extends javax.swing.JFrame {
         LbLogin = new javax.swing.JLabel();
         txtLogin = new javax.swing.JTextField();
         LbSenha = new javax.swing.JLabel();
-        txtSenha = new javax.swing.JTextField();
+        BtnView = new javax.swing.JButton();
+        txtSenha = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,6 +78,11 @@ public class RegistroUsuarios extends javax.swing.JFrame {
 
         txtEmail.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
         View.standardCornerRadius(txtEmail);
+        txtEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEmailActionPerformed(evt);
+            }
+        });
 
         LbStatus.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         LbStatus.setText("Status");
@@ -80,7 +90,7 @@ public class RegistroUsuarios extends javax.swing.JFrame {
         cbTipoUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "FUNCIONARIO", "ADMINISTRADOR" }));
 
         txtNome.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
-        View.standardCornerRadius(txtEmail);
+        View.standardCornerRadius(txtNome);
 
         cbTipoUsuario1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ATIVO", "INATIVO" }));
 
@@ -88,13 +98,20 @@ public class RegistroUsuarios extends javax.swing.JFrame {
         LbLogin.setText("Login");
 
         txtLogin.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
-        View.standardCornerRadius(txtEmail);
+        View.standardCornerRadius(txtLogin);
 
         LbSenha.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         LbSenha.setText("Senha");
 
+        BtnView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Closed_Eye.png"))); // NOI18N
+        BtnView.setBorder(null);
+        BtnView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnViewActionPerformed(evt);
+            }
+        });
+
         txtSenha.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
-        View.standardCornerRadius(txtEmail);
 
         javax.swing.GroupLayout PanelFundoLayout = new javax.swing.GroupLayout(PanelFundo);
         PanelFundo.setLayout(PanelFundoLayout);
@@ -102,35 +119,39 @@ public class RegistroUsuarios extends javax.swing.JFrame {
             PanelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelFundoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(PanelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(PanelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelFundoLayout.createSequentialGroup()
+                        .addGroup(PanelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PanelFundoLayout.createSequentialGroup()
+                                .addComponent(LbLogin)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(PanelFundoLayout.createSequentialGroup()
+                                .addComponent(LbTipoUsuario)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(PanelFundoLayout.createSequentialGroup()
+                                .addComponent(LbEmail)
+                                .addGap(15, 15, 15)
+                                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(PanelFundoLayout.createSequentialGroup()
+                                .addComponent(LbNome)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(LbStatus)
+                                .addGap(12, 12, 12)
+                                .addComponent(cbTipoUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(PanelFundoLayout.createSequentialGroup()
                         .addComponent(LbSenha)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
-                        .addComponent(BtnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(PanelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(PanelFundoLayout.createSequentialGroup()
-                            .addComponent(LbLogin)
-                            .addGap(18, 18, 18)
-                            .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(PanelFundoLayout.createSequentialGroup()
-                            .addComponent(LbTipoUsuario)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(cbTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(PanelFundoLayout.createSequentialGroup()
-                            .addComponent(LbEmail)
-                            .addGap(15, 15, 15)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(PanelFundoLayout.createSequentialGroup()
-                            .addComponent(LbNome)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(LbStatus)
-                            .addGap(12, 12, 12)
-                            .addComponent(cbTipoUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BtnView)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         PanelFundoLayout.setVerticalGroup(
             PanelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,15 +175,20 @@ public class RegistroUsuarios extends javax.swing.JFrame {
                 .addGroup(PanelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(LbLogin, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtLogin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(PanelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BtnConfirmar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtSenha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LbSenha, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(70, 70, 70))
+                    .addGroup(PanelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txtSenha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(LbSenha, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(PanelFundoLayout.createSequentialGroup()
+                            .addComponent(BtnView)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 4, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(BtnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(8, Short.MAX_VALUE))
         );
 
         View.standardCornerRadius(BtnConfirmar);
+        View.standardCornerRadius(txtSenha);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -177,10 +203,11 @@ public class RegistroUsuarios extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 6, Short.MAX_VALUE)
-                .addComponent(PanelFundo, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(PanelFundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConfirmarActionPerformed
@@ -194,22 +221,47 @@ public class RegistroUsuarios extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Preencha todos os campos");
             return;
         }
+        if (!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")){
+            JOptionPane.showMessageDialog(this, "Insira um email válido!");
+            return;
+        }
         UsuarioDAO dao = new UsuarioDAO();
         Usuario usuario = new Usuario();
         usuario.setNome(nome);
         usuario.setTipoUsuario(tipoUsuario);
         usuario.setEmail(email);
         usuario.setLogin(login);
-        usuario.setSenha(senha);
+
+        String hashedPassword = org.mindrot.jbcrypt.BCrypt.hashpw(senha, org.mindrot.jbcrypt.BCrypt.gensalt());
+        usuario.setSenha(hashedPassword);
         if (status.equals("ATIVO")) {
             usuario.setStatus(true);
         } else {
             usuario.setStatus(false);
         }
-
-        JOptionPane.showMessageDialog(null, "Usuário salvo com sucesso");
+        dao.salvarUsuario(usuario);
+        usuariosFrame.atualizarTabelaUsuarios();
         this.dispose();
     }//GEN-LAST:event_BtnConfirmarActionPerformed
+
+    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEmailActionPerformed
+
+    private boolean passwordVisible = false;
+    
+    private void BtnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnViewActionPerformed
+        passwordVisible = !passwordVisible;
+
+        // Alterna a visualização quando o botão é pressionado
+        if (passwordVisible) {
+            txtSenha.setEchoChar((char) 0);
+            BtnView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Open_Eye.png")));
+        } else {
+            txtSenha.setEchoChar('•');
+            BtnView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Closed_Eye.png")));
+        }
+    }//GEN-LAST:event_BtnViewActionPerformed
 
     /**
      * @param args the command line arguments
@@ -241,13 +293,14 @@ public class RegistroUsuarios extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RegistroUsuarios().setVisible(true);
+                new RegistroUsuarios(null).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnConfirmar;
+    private javax.swing.JButton BtnView;
     private javax.swing.JLabel LbEmail;
     private javax.swing.JLabel LbLogin;
     private javax.swing.JLabel LbNome;
@@ -260,6 +313,6 @@ public class RegistroUsuarios extends javax.swing.JFrame {
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtLogin;
     private javax.swing.JTextField txtNome;
-    private javax.swing.JTextField txtSenha;
+    private javax.swing.JPasswordField txtSenha;
     // End of variables declaration//GEN-END:variables
 }

@@ -23,7 +23,7 @@ public class Usuario {
     @Column(nullable = false)
     private String nome;
 
-    @Column(nullable = false)
+    @Column(name = "tipo_usuario", nullable = false)
     private String tipoUsuario;
 
     @Column(nullable = false)

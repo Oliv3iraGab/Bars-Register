@@ -4,7 +4,15 @@
  */
 package br.com.bars_register.view.forms;
 
+import java.util.List;
+
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+import br.com.bars_register.DAOClasses.UsuarioDAO;
+import br.com.bars_register.persistence.Usuario;
 import br.com.bars_register.util.View;
+import br.com.bars_register.view.register.RegistroUsuarios;
 
 /**
  *
@@ -17,8 +25,70 @@ public class Usuarios extends javax.swing.JFrame {
      */
     public Usuarios() {
         initComponents();
+        atualizarTabelaUsuarios();
+        editarStatus();;
     }
 
+    private void editarStatus() {
+        TblUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                if (evt.getClickCount() == 2) { // Double click
+                    int row = TblUsuarios.getSelectedRow();
+                    if (row != -1) {
+                        String nome = (String) TblUsuarios.getValueAt(row, 0);
+                        String status = (String) TblUsuarios.getValueAt(row, 3);
+                        boolean isAtivo = status.equals("Ativo");
+                        
+                        int option = javax.swing.JOptionPane.showConfirmDialog(
+                            null,
+                            "Deseja alterar o status do usuário " + nome + " para " + 
+                            (isAtivo ? "Inativo" : "Ativo") + "?",
+                            "Confirmação",
+                            javax.swing.JOptionPane.YES_NO_OPTION
+                        );
+                        
+                        if (option == javax.swing.JOptionPane.YES_OPTION) {
+                            UsuarioDAO dao = new UsuarioDAO();
+                            dao.atualizarStatus(nome, !isAtivo);
+                            atualizarTabelaUsuarios();
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    public void atualizarTabelaUsuarios() {
+        UsuarioDAO dao = new UsuarioDAO();
+        List<Usuario> usuarios = dao.listarUsuario();
+
+        DefaultTableModel model = (DefaultTableModel) TblUsuarios.getModel();
+        model.setRowCount(0);
+
+        TblUsuarios.setBackground(new java.awt.Color(248, 249, 250));
+        TblUsuarios.setForeground(new java.awt.Color(33, 37, 41));
+        TblUsuarios.setRowHeight(25);
+
+        try {
+            for (Usuario usuario : usuarios) {
+                model.addRow(new Object[] {
+                    usuario.getNome(),
+                    usuario.getTipoUsuario(),
+                    usuario.getEmail(),
+                    usuario.isStatus() ? "Ativo" : "Inativo"
+                });
+            }
+
+            TblUsuarios.repaint();
+            TblUsuarios.revalidate();
+            
+        } catch (Exception e) {
+            System.err.println("Erro ao popular tabela: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,7 +103,6 @@ public class Usuarios extends javax.swing.JFrame {
         TblUsuarios = new javax.swing.JTable();
         BtnNovoUsuario = new javax.swing.JButton();
         BtnExcluir = new javax.swing.JButton();
-        BtnEditar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -42,7 +111,7 @@ public class Usuarios extends javax.swing.JFrame {
         View.standardCornerRadius(JsPanelTblUsuarios);
 
         TblUsuarios.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
-        TblUsuarios.setForeground(new java.awt.Color(255, 255, 255));
+        TblUsuarios.setForeground(new java.awt.Color(0, 0, 0));
         TblUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -50,7 +119,15 @@ public class Usuarios extends javax.swing.JFrame {
             new String [] {
                 "Nome", "Tipo", "Email", "Status"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         JsPanelTblUsuarios.setViewportView(TblUsuarios);
 
         BtnNovoUsuario.setBackground(new java.awt.Color(78, 52, 46));
@@ -58,18 +135,22 @@ public class Usuarios extends javax.swing.JFrame {
         BtnNovoUsuario.setForeground(new java.awt.Color(255, 255, 255));
         BtnNovoUsuario.setText("+Novo Usuário");
         View.standardCornerRadius(BtnNovoUsuario);
+        BtnNovoUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnNovoUsuarioActionPerformed(evt);
+            }
+        });
 
         BtnExcluir.setBackground(new java.awt.Color(78, 52, 46));
         BtnExcluir.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
         BtnExcluir.setForeground(new java.awt.Color(255, 0, 0));
         BtnExcluir.setText("Excluir");
         View.standardCornerRadius(BtnExcluir);
-
-        BtnEditar.setBackground(new java.awt.Color(78, 52, 46));
-        BtnEditar.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
-        BtnEditar.setForeground(new java.awt.Color(255, 255, 255));
-        BtnEditar.setText("Editar");
-        View.standardCornerRadius(BtnEditar);
+        BtnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnExcluirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PanelMainLayout = new javax.swing.GroupLayout(PanelMain);
         PanelMain.setLayout(PanelMainLayout);
@@ -78,10 +159,7 @@ public class Usuarios extends javax.swing.JFrame {
             .addGroup(PanelMainLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(PanelMainLayout.createSequentialGroup()
-                        .addComponent(BtnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(BtnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BtnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnNovoUsuario)
                     .addComponent(JsPanelTblUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 633, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(22, Short.MAX_VALUE))
@@ -94,9 +172,7 @@ public class Usuarios extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(JsPanelTblUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BtnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(BtnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26))
         );
 
@@ -115,6 +191,33 @@ public class Usuarios extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BtnNovoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNovoUsuarioActionPerformed
+        RegistroUsuarios registroUsuario = new RegistroUsuarios(this);
+        registroUsuario.setVisible(true);
+    }//GEN-LAST:event_BtnNovoUsuarioActionPerformed
+
+    private void BtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnExcluirActionPerformed
+        try {
+            UsuarioDAO dao = new UsuarioDAO();
+            int rowSelecionada = TblUsuarios.getSelectedRow();
+
+            String email = TblUsuarios.getValueAt(rowSelecionada, 2).toString();
+            String nome = TblUsuarios.getValueAt(rowSelecionada, 0).toString();
+            int confirm = JOptionPane.showConfirmDialog(
+                    this,
+                    "Deseja excluir o usuario " + nome + "?",
+                    "Confirmar Exclusão",
+                    javax.swing.JOptionPane.YES_NO_OPTION
+            );
+            if (confirm == javax.swing.JOptionPane.YES_OPTION) {
+                dao.excluirUsuario(email);
+                atualizarTabelaUsuarios();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
+        }
+    }//GEN-LAST:event_BtnExcluirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -152,7 +255,6 @@ public class Usuarios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnEditar;
     private javax.swing.JButton BtnExcluir;
     private javax.swing.JButton BtnNovoUsuario;
     private javax.swing.JScrollPane JsPanelTblUsuarios;
