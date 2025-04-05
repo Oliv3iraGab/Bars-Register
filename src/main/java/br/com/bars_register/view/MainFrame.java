@@ -4,6 +4,7 @@
  */
 package br.com.bars_register.view;
 
+import br.com.bars_register.persistence.Usuario;
 import javax.swing.JToggleButton;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
@@ -21,10 +22,12 @@ public class MainFrame extends javax.swing.JFrame {
     private Vendas vendasPanel;
     private Usuarios usuariosPanel;
     private Fornecedores fornecedoresPanel;
-    private Relatorio relatorioPanel;
+    private Relatorios relatorioPanel;
+    private Usuario usuario;
     
-    public MainFrame() {
+    public MainFrame(Usuario usuario) {
         initComponents();
+        this.usuario = usuario;
     
         // Configura todos os botões laterais
         configureLateralButtons(BtnDashboard);
@@ -56,7 +59,7 @@ public class MainFrame extends javax.swing.JFrame {
         vendasPanel = new Vendas();
         usuariosPanel = new Usuarios();
         fornecedoresPanel = new Fornecedores();
-        relatorioPanel = new Relatorio();
+        relatorioPanel = new Relatorios(usuario);
         
         // Converte os JFrames para JPanels e armazena seus painéis principais
         dashboardPanel.setContentPane((JPanel)dashboardPanel.getContentPane());
@@ -96,6 +99,8 @@ public class MainFrame extends javax.swing.JFrame {
                 break;
             case "Relatorios":
                 painelSelecionado = (JPanel)relatorioPanel.getContentPane();
+                relatorioPanel.atualizarReceitaTotal();
+                relatorioPanel.atualizarTotalVendas();
                 break;
         }
         
@@ -331,7 +336,7 @@ public class MainFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainFrame().setVisible(true);
+                new MainFrame(null).setVisible(true);
             }
         });
     }

@@ -4,19 +4,51 @@
  */
 package br.com.bars_register.view.forms;
 
+import br.com.bars_register.DAOClasses.VendaDAO;
+import br.com.bars_register.persistence.Relatorio;
+import br.com.bars_register.persistence.Usuario;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import br.com.bars_register.util.View;
 
 /**
  *
  * @author limag
  */
-public class Relatorio extends javax.swing.JFrame {
+public class Relatorios extends javax.swing.JFrame {
 
     /**
      * Creates new form Relatorio
      */
-    public Relatorio() {
+    private Usuario usuario;
+
+    public Relatorios(Usuario usuario) {
         initComponents();
+        this.usuario = usuario;
+    }
+
+    public void atualizarReceitaTotal() {
+        VendaDAO vendaDAO = new VendaDAO();
+        double total = vendaDAO.getTotalVendas();
+
+        java.text.NumberFormat currencyFormat = java.text.NumberFormat.getCurrencyInstance();
+        LbReceitaNumero.setText(currencyFormat.format(total));
+    }
+    public void atualizarTotalVendas() {
+        VendaDAO vendaDAO = new VendaDAO();
+        int total = vendaDAO.listarVendas().size();
+        
+
+        LbVendasNumero.setText(String.valueOf(total));
     }
 
     /**
@@ -31,7 +63,7 @@ public class Relatorio extends javax.swing.JFrame {
         PanelMain = new javax.swing.JPanel();
         PanelFundo = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtAreaRelatorio = new javax.swing.JTextArea();
         PanelReceita = new javax.swing.JPanel();
         LbReceitaTotal = new javax.swing.JLabel();
         LbReceitaNumero = new javax.swing.JLabel();
@@ -40,10 +72,11 @@ public class Relatorio extends javax.swing.JFrame {
         LbVendasNumero = new javax.swing.JLabel();
         PanelDataEBotao = new javax.swing.JPanel();
         txtDataFinal = new javax.swing.JFormattedTextField();
-        BtnGerar = new javax.swing.JButton();
         txtDataInicial = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        BtnGerar = new javax.swing.JButton();
+        BtnSalvar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,11 +85,11 @@ public class Relatorio extends javax.swing.JFrame {
         PanelFundo.setBackground(new java.awt.Color(255, 255, 255));
         View.standardCornerRadius(PanelFundo);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
-        jTextArea1.setRows(5);
-        jTextArea1.setBorder(null);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtAreaRelatorio.setColumns(20);
+        txtAreaRelatorio.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        txtAreaRelatorio.setRows(5);
+        txtAreaRelatorio.setBorder(null);
+        jScrollPane1.setViewportView(txtAreaRelatorio);
 
         javax.swing.GroupLayout PanelFundoLayout = new javax.swing.GroupLayout(PanelFundo);
         PanelFundo.setLayout(PanelFundoLayout);
@@ -152,13 +185,6 @@ public class Relatorio extends javax.swing.JFrame {
         View.standardCornerRadius(txtDataFinal);
         PanelDataEBotao.add(txtDataFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(258, 6, 127, 40));
 
-        BtnGerar.setBackground(new java.awt.Color(78, 52, 46));
-        BtnGerar.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
-        BtnGerar.setForeground(new java.awt.Color(255, 255, 255));
-        BtnGerar.setText("Gerar");
-        View.standardCornerRadius(BtnGerar);
-        PanelDataEBotao.add(BtnGerar, new org.netbeans.lib.awtextra.AbsoluteConstraints(532, 6, 108, 40));
-
         txtDataInicial.setBackground(new java.awt.Color(248, 249, 250));
         try {
             txtDataInicial.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -177,6 +203,29 @@ public class Relatorio extends javax.swing.JFrame {
         jLabel2.setText("Até:");
         PanelDataEBotao.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 23, -1, -1));
 
+        BtnGerar.setBackground(new java.awt.Color(78, 52, 46));
+        BtnGerar.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        BtnGerar.setForeground(new java.awt.Color(255, 255, 255));
+        BtnGerar.setText("Gerar");
+        View.standardCornerRadius(BtnGerar);
+        BtnGerar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnGerarActionPerformed(evt);
+            }
+        });
+        PanelDataEBotao.add(BtnGerar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 10, 108, 40));
+
+        BtnSalvar.setBackground(new java.awt.Color(78, 52, 46));
+        BtnSalvar.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
+        BtnSalvar.setForeground(new java.awt.Color(255, 255, 255));
+        BtnSalvar.setText("Salvar");
+        View.standardCornerRadius(BtnSalvar);
+        BtnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSalvarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PanelMainLayout = new javax.swing.GroupLayout(PanelMain);
         PanelMain.setLayout(PanelMainLayout);
         PanelMainLayout.setHorizontalGroup(
@@ -187,7 +236,10 @@ public class Relatorio extends javax.swing.JFrame {
                     .addGroup(PanelMainLayout.createSequentialGroup()
                         .addComponent(PanelReceita, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(PanelTotalVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(PanelTotalVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BtnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12))
                     .addComponent(PanelFundo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(PanelDataEBotao, javax.swing.GroupLayout.DEFAULT_SIZE, 646, Short.MAX_VALUE))
                 .addContainerGap(21, Short.MAX_VALUE))
@@ -198,9 +250,11 @@ public class Relatorio extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addComponent(PanelDataEBotao, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
-                .addGroup(PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PanelReceita, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PanelTotalVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(PanelReceita, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(PanelTotalVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BtnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addComponent(PanelFundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(8, Short.MAX_VALUE))
@@ -224,6 +278,64 @@ public class Relatorio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void BtnSalvarActionPerformed(java.awt.event.ActionEvent evt) {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Salvar Relatório");
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Arquivo de texto (*.txt)", "txt"));
+        
+        LocalDateTime now = LocalDateTime.now();
+        String defaultFileName = String.format("relatorio_%s.txt", 
+            now.format(DateTimeFormatter.ofPattern("dd-MM-yyyy_HH-mm")));
+        fileChooser.setSelectedFile(new File(defaultFileName));
+        
+        if (fileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+            if (!file.getName().toLowerCase().endsWith(".txt")) {
+                file = new File(file.getAbsolutePath() + ".txt");
+            }
+            
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                writer.write(txtAreaRelatorio.getText());
+                JOptionPane.showMessageDialog(this, 
+                    "Relatório salvo com sucesso em:\n" + file.getAbsolutePath(),
+                    "Sucesso",
+                    JOptionPane.INFORMATION_MESSAGE);
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(this,
+                    "Erro ao salvar o arquivo: " + e.getMessage(),
+                    "Erro",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    private void BtnGerarActionPerformed(java.awt.event.ActionEvent evt) {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+            String dataInicialStr = txtDataInicial.getText();
+            String dataFinalStr = txtDataFinal.getText();
+
+            LocalDateTime dataInicial = LocalDate.parse(dataInicialStr, formatter).atStartOfDay();
+            LocalDateTime dataFinal = LocalDate.parse(dataFinalStr, formatter).atTime(23, 59, 59);
+
+            Relatorio relatorio = new Relatorio();
+            relatorio.setGerador(usuario);
+            String relatorioTxt = relatorio.gerarRelatorioFormatado(dataInicial, dataFinal);
+
+            txtAreaRelatorio.setText(relatorioTxt);
+            LbReceitaNumero.setText(String.format("R$ %.2f", relatorio.getTotalVendas()));
+            LbVendasNumero.setText(String.valueOf(relatorio.getQuantidadeVendas()));
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,
+                    "Erro ao gerar relatório. Verifique se as datas estão no formato correto (dd/mm/aaaa)",
+                    "Erro",
+                    JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -241,26 +353,28 @@ public class Relatorio extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Relatorio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Relatorios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Relatorio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Relatorios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Relatorio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Relatorios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Relatorio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Relatorios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Relatorio().setVisible(true);
+                new Relatorios(null).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnGerar;
+    private javax.swing.JButton BtnSalvar;
     private javax.swing.JLabel LbReceitaNumero;
     private javax.swing.JLabel LbReceitaTotal;
     private javax.swing.JLabel LbTotalVendas;
@@ -273,7 +387,7 @@ public class Relatorio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea txtAreaRelatorio;
     private javax.swing.JFormattedTextField txtDataFinal;
     private javax.swing.JFormattedTextField txtDataInicial;
     // End of variables declaration//GEN-END:variables

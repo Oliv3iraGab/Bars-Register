@@ -129,7 +129,7 @@ public class Login extends javax.swing.JFrame {
         }
             Usuario usuario = UsuarioDAO.validarUsuario(login, senha);
             if (usuario != null) {
-                MainFrame mainframe = new MainFrame();
+                MainFrame mainframe = new MainFrame(usuario);
                 if (usuario.getTipoUsuario().equals("FUNCIONARIO")) {
                     mainframe.BtnRelatorios.setVisible(false);
                     mainframe.BtnUsuarios.setVisible(false);
