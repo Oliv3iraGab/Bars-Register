@@ -12,7 +12,6 @@ O projeto será desenvolvido utilizando as tecnologias Java e Swing para a interf
 Descrição dos usuários (quem serão os usuários do sistema)
 Os usuários do sistema Bar’s Register serão divididos em diferentes perfis, cada um com permissões específicas para garantir a eficiência e segurança nas operações:
 Funcionário: Responsáveis pelo registro das vendas e pelo controle imediato das transações realizadas.
-Gestor Financeiro: Encarregado de monitorar o fluxo financeiro, gerenciar relatórios de vendas e realizar análises sobre o desempenho econômico do estabelecimento.
 Gerente: Responsável pela supervisão geral do sistema, incluindo a gestão de produtos, usuários, fornecedores e permissões, além de garantir a operação eficiente do dia a dia.
 
 Necessidades observadas e regras de negócio
@@ -61,7 +60,7 @@ Requisitos não funcionais
 (RNF003) Página de Login
  O software deve incluir uma página de login que permita a autenticação dos usuários, assegurando que cada um tenha acesso apenas às funções e permissões específicas definidas para seu perfil.
 (RNF004) Segurança
- O sistema deve utilizar hashing de senhas com PBKDF2, garantindo proteção contra ataques de força bruta. Além disso, deve implementar uma rotina de backups automáticos e regulares para evitar perda de dados. O processo de restauração (restore) dos backups deve ser testado periodicamente, assegurando sua eficácia em caso de falhas ou recuperação de informações.
+ O sistema deve utilizar hashing de senhas com BCrypt, garantindo proteção contra ataques de força bruta. Além disso, deve implementar uma rotina de backups automáticos e regulares para evitar perda de dados. O processo de restauração (restore) dos backups deve ser testado periodicamente, assegurando sua eficácia em caso de falhas ou recuperação de informações.
 
 Tecnologias previstas
 Linguagem de Programação: Java
