@@ -46,6 +46,14 @@ public class Fornecedores extends javax.swing.JFrame {
             modeloTable.addRow(rowData);
         }
     }
+    
+        public void atualizarTotalFornecedores() {
+        FornecedorDAO dao = new FornecedorDAO();
+        int total = dao.listarFornecedores(txtBuscaFornecedor.getText()).size();
+        
+
+        LbTotalFornecedoresNumero.setText(String.valueOf(total));
+    }
 
     /**
      * Verifica se há uma row selecionada para ativar ou não o botão de excluir
@@ -109,6 +117,7 @@ public class Fornecedores extends javax.swing.JFrame {
                 txtBuscaFornecedorCaretUpdate(evt);
             }
         });
+        View.standardCornerRadius(txtBuscaFornecedor);
 
         PanelTotalFornecedores.setBackground(new java.awt.Color(78, 52, 46));
         PanelTotalFornecedores.setPreferredSize(new java.awt.Dimension(180, 100));
@@ -296,7 +305,7 @@ public class Fornecedores extends javax.swing.JFrame {
             dao.excluirFornecedor(cnpj);
             atualizarTabelaFornecedores();
         }
-    }//GEN-LAST:event_BtnExcluirActionPerformed
+    }                                          
 
     /**
      * @param args the command line arguments
