@@ -343,6 +343,14 @@ public class Vendas extends javax.swing.JFrame {
                         .orElse(null);
 
                 if (produto != null) {
+                    if (quantidade > produto.getEstoque()) {
+                        JOptionPane.showMessageDialog(this, "Quantidade insuficiente em estoque para " + nomeProduto);
+                        listModel.remove(i);
+                        totalValue -= produto.getPreco() * quantidade;
+                        atualizarTotal();
+                        return;
+                    }
+                    
                     ItemVenda itemVenda = new ItemVenda();
                     itemVenda.setProduto(produto);
                     itemVenda.setVenda(venda);
