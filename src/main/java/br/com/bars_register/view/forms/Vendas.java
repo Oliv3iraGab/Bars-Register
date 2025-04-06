@@ -31,25 +31,6 @@ public class Vendas extends javax.swing.JFrame {
         setupComponents();
     }
 
-    public void atualizarTabelaRegistroProdutos() {
-        ProdutoDAO produtoDAO = new ProdutoDAO();
-        String nomeProduto = txtBuscaProduto.getText();
-
-        List<Produto> listaProdutos = produtoDAO.listarProdutos(nomeProduto);
-
-        DefaultTableModel modeloTable = (DefaultTableModel) TblProdutos.getModel();
-        modeloTable.setRowCount(0);
-
-        for (Produto produto : listaProdutos) {
-            Object[] rowData = {
-                produto.getNome(),
-                1,
-                "R$ " + produto.getPreco()
-            };
-            modeloTable.addRow(rowData);
-        }
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -423,5 +404,24 @@ public class Vendas extends javax.swing.JFrame {
 
     private void atualizarTotal() {
         LbTotalNumero.setText(currencyFormat.format(totalValue));
+    }
+
+    public void atualizarTabelaRegistroProdutos() {
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+        String nomeProduto = txtBuscaProduto.getText();
+
+        List<Produto> listaProdutos = produtoDAO.listarProdutos(nomeProduto);
+
+        DefaultTableModel modeloTable = (DefaultTableModel) TblProdutos.getModel();
+        modeloTable.setRowCount(0);
+
+        for (Produto produto : listaProdutos) {
+            Object[] rowData = {
+                produto.getNome(),
+                1,
+                "R$ " + produto.getPreco()
+            };
+            modeloTable.addRow(rowData);
+        }
     }
 }

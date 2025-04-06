@@ -38,18 +38,3 @@ INSERT INTO vendas (dataVenda, total, tipoPagamento) VALUES
 ('2024-01-15 17:10:00', 156.80, 'DEBITO'),
 ('2024-01-16 13:25:00', 78.90, 'PIX'),
 ('2024-01-16 14:50:00', 34.50, 'DINHEIRO');
-
--- Populando a tabela itemVenda
-INSERT INTO itemVenda (venda_id, produto_id, quantidade) VALUES
-(1, 1, 3),  -- 3 Cervejas
-(1, 2, 2),  -- 2 Refrigerantes
-(2, 6, 2),  -- 2 Vodkas
-(2, 3, 1),  -- 1 Água
-(3, 4, 2),  -- 2 Sucos
-(3, 3, 4),  -- 4 Águas
-(4, 7, 1),  -- 1 Whisky
-(4, 8, 1),  -- 1 Gin
-(5, 1, 5),  -- 5 Cervejas
-(5, 5, 3),  -- 3 Energéticos
-(6, 2, 2),  -- 2 Refrigerantes
-(6, 4, 3);  -- 3 Sucos
