@@ -28,66 +28,6 @@ public class Usuarios extends javax.swing.JFrame {
         atualizarTabelaUsuarios();
         editarStatus();;
     }
-
-    private void editarStatus() {
-        TblUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                if (evt.getClickCount() == 2) { // Double click
-                    int row = TblUsuarios.getSelectedRow();
-                    if (row != -1) {
-                        String nome = (String) TblUsuarios.getValueAt(row, 0);
-                        String status = (String) TblUsuarios.getValueAt(row, 3);
-                        boolean isAtivo = status.equals("Ativo");
-                        
-                        int option = javax.swing.JOptionPane.showConfirmDialog(
-                            null,
-                            "Deseja alterar o status do usuário " + nome + " para " + 
-                            (isAtivo ? "Inativo" : "Ativo") + "?",
-                            "Confirmação",
-                            javax.swing.JOptionPane.YES_NO_OPTION
-                        );
-                        
-                        if (option == javax.swing.JOptionPane.YES_OPTION) {
-                            UsuarioDAO dao = new UsuarioDAO();
-                            dao.atualizarStatus(nome, !isAtivo);
-                            atualizarTabelaUsuarios();
-                        }
-                    }
-                }
-            }
-        });
-    }
-
-    public void atualizarTabelaUsuarios() {
-        UsuarioDAO dao = new UsuarioDAO();
-        List<Usuario> usuarios = dao.listarUsuario();
-
-        DefaultTableModel model = (DefaultTableModel) TblUsuarios.getModel();
-        model.setRowCount(0);
-
-        TblUsuarios.setBackground(new java.awt.Color(248, 249, 250));
-        TblUsuarios.setForeground(new java.awt.Color(33, 37, 41));
-        TblUsuarios.setRowHeight(25);
-
-        try {
-            for (Usuario usuario : usuarios) {
-                model.addRow(new Object[] {
-                    usuario.getNome(),
-                    usuario.getTipoUsuario(),
-                    usuario.getEmail(),
-                    usuario.isStatus() ? "Ativo" : "Inativo"
-                });
-            }
-
-            TblUsuarios.repaint();
-            TblUsuarios.revalidate();
-            
-        } catch (Exception e) {
-            System.err.println("Erro ao popular tabela: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -261,4 +201,64 @@ public class Usuarios extends javax.swing.JFrame {
     private javax.swing.JPanel PanelMain;
     private javax.swing.JTable TblUsuarios;
     // End of variables declaration//GEN-END:variables
+
+    private void editarStatus() {
+        TblUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                if (evt.getClickCount() == 2) { // Double click
+                    int row = TblUsuarios.getSelectedRow();
+                    if (row != -1) {
+                        String nome = (String) TblUsuarios.getValueAt(row, 0);
+                        String status = (String) TblUsuarios.getValueAt(row, 3);
+                        boolean isAtivo = status.equals("Ativo");
+                        
+                        int option = javax.swing.JOptionPane.showConfirmDialog(
+                            null,
+                            "Deseja alterar o status do usuário " + nome + " para " + 
+                            (isAtivo ? "Inativo" : "Ativo") + "?",
+                            "Confirmação",
+                            javax.swing.JOptionPane.YES_NO_OPTION
+                        );
+                        
+                        if (option == javax.swing.JOptionPane.YES_OPTION) {
+                            UsuarioDAO dao = new UsuarioDAO();
+                            dao.atualizarStatus(nome, !isAtivo);
+                            atualizarTabelaUsuarios();
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    public void atualizarTabelaUsuarios() {
+        UsuarioDAO dao = new UsuarioDAO();
+        List<Usuario> usuarios = dao.listarUsuario();
+
+        DefaultTableModel model = (DefaultTableModel) TblUsuarios.getModel();
+        model.setRowCount(0);
+
+        TblUsuarios.setBackground(new java.awt.Color(248, 249, 250));
+        TblUsuarios.setForeground(new java.awt.Color(33, 37, 41));
+        TblUsuarios.setRowHeight(25);
+
+        try {
+            for (Usuario usuario : usuarios) {
+                model.addRow(new Object[] {
+                    usuario.getNome(),
+                    usuario.getTipoUsuario(),
+                    usuario.getEmail(),
+                    usuario.isStatus() ? "Ativo" : "Inativo"
+                });
+            }
+
+            TblUsuarios.repaint();
+            TblUsuarios.revalidate();
+            
+        } catch (Exception e) {
+            System.err.println("Erro ao popular tabela: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
 }

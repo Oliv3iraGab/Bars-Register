@@ -22,32 +22,6 @@ public class Dashboard extends javax.swing.JFrame {
         atualizarTotalVendasHoje();
     }
 
-    public void atualizarTotalVendasHoje() {
-        VendaDAO vendaDAO = new VendaDAO();
-        double totalHoje = vendaDAO.getTotalVendasHoje();
-        
-        java.text.NumberFormat currencyFormat = java.text.NumberFormat.getCurrencyInstance();
-        LbNumeroVendas.setText(currencyFormat.format(totalHoje));
-    }
-    public void atualizarTabelaVendas() {
-        VendaDAO vendaDAO = new VendaDAO();
-        List <Venda> listaVendas = vendaDAO.listarVendas();
-
-        DefaultTableModel modeloTable = (DefaultTableModel) TblVendasRecentes.getModel();
-        modeloTable.setRowCount(0);
-        
-        java.time.format.DateTimeFormatter formatter = java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        
-        for (Venda venda : listaVendas){
-            Object[] rowData = {
-                venda.getDataVenda().format(formatter),
-                "R$ " + venda.getTotal(),
-                venda.getTipoPagamento()
-            };
-            modeloTable.addRow(rowData);
-        }
-    }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -241,4 +215,31 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JScrollPane ScPanelVendasRecentes;
     private javax.swing.JTable TblVendasRecentes;
     // End of variables declaration//GEN-END:variables
+
+    public void atualizarTotalVendasHoje() {
+        VendaDAO vendaDAO = new VendaDAO();
+        double totalHoje = vendaDAO.getTotalVendasHoje();
+        
+        java.text.NumberFormat currencyFormat = java.text.NumberFormat.getCurrencyInstance();
+        LbNumeroVendas.setText(currencyFormat.format(totalHoje));
+    }
+    
+    public void atualizarTabelaVendas() {
+        VendaDAO vendaDAO = new VendaDAO();
+        List <Venda> listaVendas = vendaDAO.listarVendas();
+
+        DefaultTableModel modeloTable = (DefaultTableModel) TblVendasRecentes.getModel();
+        modeloTable.setRowCount(0);
+        
+        java.time.format.DateTimeFormatter formatter = java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        
+        for (Venda venda : listaVendas){
+            Object[] rowData = {
+                venda.getDataVenda().format(formatter),
+                "R$ " + venda.getTotal(),
+                venda.getTipoPagamento()
+            };
+            modeloTable.addRow(rowData);
+        }
+    }
 }

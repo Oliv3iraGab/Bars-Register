@@ -30,44 +30,6 @@ public class Produtos extends javax.swing.JFrame {
         listnerTabela();
     }
 
-    public void atualizarTabelaProdutos() {
-        ProdutoDAO produtoDAO = new ProdutoDAO();
-        String nomeProduto = txtBuscaProduto.getText();
-
-        List<Produto> listaProdutos = produtoDAO.listarProdutos(nomeProduto);
-
-        DefaultTableModel modeloTable = (DefaultTableModel) TblProdutos.getModel();
-        modeloTable.setRowCount(0);
-
-        for (Produto produto : listaProdutos) {
-            Object[] rowData = {
-                produto.getNome(),
-                "R$ " + produto.getPreco(),
-                produto.getEstoque(),
-                produto.getAcoes()
-            };
-            modeloTable.addRow(rowData);
-        }
-    }
-
-    /**
-     * Verifica se há uma row selecionada para ativar ou não o botão de excluir
-     */
-    private void listnerTabela() {
-        TblProdutos.getSelectionModel().addListSelectionListener(e -> {
-            if (!e.getValueIsAdjusting()) {
-                int selecionado = TblProdutos.getSelectedRow();
-                if (selecionado != -1) {
-                    BtnExcluir.setEnabled(true);
-                    BtnEditar.setEnabled(true);
-                } else {
-                    BtnExcluir.setEnabled(false);
-                    BtnEditar.setEnabled(false);
-                }
-            }
-        });
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -219,7 +181,8 @@ public class Produtos extends javax.swing.JFrame {
         String nome = TblProdutos.getValueAt(selectedRow, 0).toString();
         String preco = TblProdutos.getValueAt(selectedRow, 1).toString().replace("R$ ", "");
         String estoque = TblProdutos.getValueAt(selectedRow, 2).toString();
-        registroProdutos.setDadosProduto(nome, preco, estoque);
+        String acoes = TblProdutos.getValueAt(selectedRow, 3).toString();
+        registroProdutos.setDadosProduto(nome, preco, estoque, acoes);
 
     }//GEN-LAST:event_BtnEditarActionPerformed
 
@@ -268,4 +231,42 @@ public class Produtos extends javax.swing.JFrame {
     private javax.swing.JTable TblProdutos;
     private javax.swing.JTextField txtBuscaProduto;
     // End of variables declaration//GEN-END:variables
+
+    public void atualizarTabelaProdutos() {
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+        String nomeProduto = txtBuscaProduto.getText();
+
+        List<Produto> listaProdutos = produtoDAO.listarProdutos(nomeProduto);
+
+        DefaultTableModel modeloTable = (DefaultTableModel) TblProdutos.getModel();
+        modeloTable.setRowCount(0);
+
+        for (Produto produto : listaProdutos) {
+            Object[] rowData = {
+                produto.getNome(),
+                "R$ " + produto.getPreco(),
+                produto.getEstoque(),
+                produto.getAcoes()
+            };
+            modeloTable.addRow(rowData);
+        }
+    }
+
+    /**
+     * Verifica se há uma row selecionada para ativar ou não o botão de excluir
+     */
+    private void listnerTabela() {
+        TblProdutos.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                int selecionado = TblProdutos.getSelectedRow();
+                if (selecionado != -1) {
+                    BtnExcluir.setEnabled(true);
+                    BtnEditar.setEnabled(true);
+                } else {
+                    BtnExcluir.setEnabled(false);
+                    BtnEditar.setEnabled(false);
+                }
+            }
+        });
+    }
 }

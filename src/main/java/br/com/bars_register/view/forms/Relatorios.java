@@ -36,21 +36,6 @@ public class Relatorios extends javax.swing.JFrame {
         this.usuario = usuario;
     }
 
-    public void atualizarReceitaTotal() {
-        VendaDAO vendaDAO = new VendaDAO();
-        double total = vendaDAO.getTotalVendas();
-
-        java.text.NumberFormat currencyFormat = java.text.NumberFormat.getCurrencyInstance();
-        LbReceitaNumero.setText(currencyFormat.format(total));
-    }
-    public void atualizarTotalVendas() {
-        VendaDAO vendaDAO = new VendaDAO();
-        int total = vendaDAO.listarVendas().size();
-        
-
-        LbVendasNumero.setText(String.valueOf(total));
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -391,4 +376,20 @@ public class Relatorios extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField txtDataFinal;
     private javax.swing.JFormattedTextField txtDataInicial;
     // End of variables declaration//GEN-END:variables
+
+    public void atualizarReceitaTotal() {
+        VendaDAO vendaDAO = new VendaDAO();
+        double total = vendaDAO.getTotalVendas();
+
+        java.text.NumberFormat currencyFormat = java.text.NumberFormat.getCurrencyInstance();
+        LbReceitaNumero.setText(currencyFormat.format(total));
+    }
+    
+    public void atualizarTotalVendas() {
+        VendaDAO vendaDAO = new VendaDAO();
+        int total = vendaDAO.listarVendas().size();
+        
+
+        LbVendasNumero.setText(String.valueOf(total));
+    }
 }

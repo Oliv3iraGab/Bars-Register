@@ -28,51 +28,6 @@ public class Fornecedores extends javax.swing.JFrame {
         listnerTabela();
     }
 
-    public void atualizarTabelaFornecedores() {
-        FornecedorDAO dao = new FornecedorDAO();
-        String nome = txtBuscaFornecedor.getText();
-        List<Fornecedor> listaFornecedores = dao.listarFornecedores(nome);
-
-        DefaultTableModel modeloTable = (DefaultTableModel) TblFornecedores.getModel();
-        modeloTable.setRowCount(0);
-
-        for (Fornecedor fornecedor : listaFornecedores) {
-            Object[] rowData = {
-                fornecedor.getNome(),
-                fornecedor.getContato(),
-                fornecedor.getEndereco(),
-                fornecedor.getCnpj()
-            };
-            modeloTable.addRow(rowData);
-        }
-    }
-    
-        public void atualizarTotalFornecedores() {
-        FornecedorDAO dao = new FornecedorDAO();
-        int total = dao.listarFornecedores(txtBuscaFornecedor.getText()).size();
-        
-
-        LbTotalFornecedoresNumero.setText(String.valueOf(total));
-    }
-
-    /**
-     * Verifica se há uma row selecionada para ativar ou não o botão de excluir
-     */
-    private void listnerTabela() {
-        TblFornecedores.getSelectionModel().addListSelectionListener(e -> {
-            if (!e.getValueIsAdjusting()) {
-                int selecionado = TblFornecedores.getSelectedRow();
-                if (selecionado != -1) {
-                    BtnExcluir.setEnabled(true);
-                    BtnEditar.setEnabled(true);
-                } else {
-                    BtnExcluir.setEnabled(false);
-                    BtnEditar.setEnabled(false);
-                }
-            }
-        });
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -355,4 +310,49 @@ public class Fornecedores extends javax.swing.JFrame {
     private javax.swing.JTable TblFornecedores;
     private javax.swing.JTextField txtBuscaFornecedor;
     // End of variables declaration//GEN-END:variables
+
+    public void atualizarTabelaFornecedores() {
+        FornecedorDAO dao = new FornecedorDAO();
+        String nome = txtBuscaFornecedor.getText();
+        List<Fornecedor> listaFornecedores = dao.listarFornecedores(nome);
+
+        DefaultTableModel modeloTable = (DefaultTableModel) TblFornecedores.getModel();
+        modeloTable.setRowCount(0);
+
+        for (Fornecedor fornecedor : listaFornecedores) {
+            Object[] rowData = {
+                fornecedor.getNome(),
+                fornecedor.getContato(),
+                fornecedor.getEndereco(),
+                fornecedor.getCnpj()
+            };
+            modeloTable.addRow(rowData);
+        }
+    }
+    
+        public void atualizarTotalFornecedores() {
+        FornecedorDAO dao = new FornecedorDAO();
+        int total = dao.listarFornecedores(txtBuscaFornecedor.getText()).size();
+        
+
+        LbTotalFornecedoresNumero.setText(String.valueOf(total));
+    }
+
+    /**
+     * Verifica se há uma row selecionada para ativar ou não o botão de excluir
+     */
+    private void listnerTabela() {
+        TblFornecedores.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                int selecionado = TblFornecedores.getSelectedRow();
+                if (selecionado != -1) {
+                    BtnExcluir.setEnabled(true);
+                    BtnEditar.setEnabled(true);
+                } else {
+                    BtnExcluir.setEnabled(false);
+                    BtnEditar.setEnabled(false);
+                }
+            }
+        });
+    }
 }

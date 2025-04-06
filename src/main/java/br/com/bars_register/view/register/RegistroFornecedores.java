@@ -26,13 +26,6 @@ public class RegistroFornecedores extends javax.swing.JFrame {
         this.fornecedoresFrame = fornecedoresFrame;
     }
 
-    public void setDadosFornecedor(String nome, String contato, String endereco, String cnpj) {
-        txtNome.setText(nome);
-        txtContato.setText(contato);
-        txtEndereco.setText(endereco);
-        txtCnpj.setText(cnpj);
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -249,4 +242,11 @@ public class RegistroFornecedores extends javax.swing.JFrame {
     private javax.swing.JTextField txtEndereco;
     private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
+
+    public void setDadosFornecedor(String nome, String contato, String endereco, String cnpj) {
+        txtNome.setText(nome);
+        txtContato.setText(contato);
+        txtEndereco.setText(endereco);
+        txtCnpj.setText(cnpj);
+    }
 }

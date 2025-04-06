@@ -55,69 +55,6 @@ public class Vendas extends javax.swing.JFrame {
         }
     }
 
-    private void setupComponents() {
-        listModel = new DefaultListModel<>();
-        ListCarrinho.setModel(listModel);
-        atualizarTabelaRegistroProdutos();
-        txtBuscaProduto.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Busque um produto");
-        currencyFormat = new DecimalFormat("R$ #,##0.00");
-
-        TblProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                if (evt.getClickCount() == 2) {
-                    adicionarItemAoCarrinho();
-                }
-            }
-        });
-
-        ListCarrinho.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_DELETE) {
-                    removerItemDoCarrinho();
-                }
-            }
-        });
-    }
-
-    private void adicionarItemAoCarrinho() {
-        int row = TblProdutos.getSelectedRow();
-        if (row != -1) {
-            String nome = (String) TblProdutos.getValueAt(row, 0);
-            int quantidade = Integer.parseInt(TblProdutos.getValueAt(row, 1).toString());
-            String precoStr = TblProdutos.getValueAt(row, 2).toString().replace("R$ ", "");
-            double preco = Double.parseDouble(precoStr);
-
-            String item = String.format("%s x%d - %s", nome, quantidade,
-                    currencyFormat.format(preco * quantidade));
-
-            listModel.addElement(item);
-            totalValue += (preco * quantidade);
-            atualizarTotal();
-        }
-    }
-
-    private void removerItemDoCarrinho() {
-        int index = ListCarrinho.getSelectedIndex();
-        if (index != -1) {
-            // Extrai o preço da string do item
-            String item = listModel.getElementAt(index);
-            String priceStr = item.substring(item.lastIndexOf("R$")).trim();
-            try {
-                double price = currencyFormat.parse(priceStr).doubleValue();
-                totalValue -= price;
-                atualizarTotal();
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
-            listModel.remove(index);
-        }
-    }
-
-    private void atualizarTotal() {
-        LbTotalNumero.setText(currencyFormat.format(totalValue));
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -429,4 +366,67 @@ public class Vendas extends javax.swing.JFrame {
     private javax.swing.JTable TblProdutos;
     private javax.swing.JTextField txtBuscaProduto;
     // End of variables declaration//GEN-END:variables
+
+    private void setupComponents() {
+        listModel = new DefaultListModel<>();
+        ListCarrinho.setModel(listModel);
+        atualizarTabelaRegistroProdutos();
+        txtBuscaProduto.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Busque um produto");
+        currencyFormat = new DecimalFormat("R$ #,##0.00");
+
+        TblProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                if (evt.getClickCount() == 2) {
+                    adicionarItemAoCarrinho();
+                }
+            }
+        });
+
+        ListCarrinho.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_DELETE) {
+                    removerItemDoCarrinho();
+                }
+            }
+        });
+    }
+
+    private void adicionarItemAoCarrinho() {
+        int row = TblProdutos.getSelectedRow();
+        if (row != -1) {
+            String nome = (String) TblProdutos.getValueAt(row, 0);
+            int quantidade = Integer.parseInt(TblProdutos.getValueAt(row, 1).toString());
+            String precoStr = TblProdutos.getValueAt(row, 2).toString().replace("R$ ", "");
+            double preco = Double.parseDouble(precoStr);
+
+            String item = String.format("%s x%d - %s", nome, quantidade,
+                    currencyFormat.format(preco * quantidade));
+
+            listModel.addElement(item);
+            totalValue += (preco * quantidade);
+            atualizarTotal();
+        }
+    }
+
+    private void removerItemDoCarrinho() {
+        int index = ListCarrinho.getSelectedIndex();
+        if (index != -1) {
+            // Extrai o preço da string do item
+            String item = listModel.getElementAt(index);
+            String priceStr = item.substring(item.lastIndexOf("R$")).trim();
+            try {
+                double price = currencyFormat.parse(priceStr).doubleValue();
+                totalValue -= price;
+                atualizarTotal();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            listModel.remove(index);
+        }
+    }
+
+    private void atualizarTotal() {
+        LbTotalNumero.setText(currencyFormat.format(totalValue));
+    }
 }

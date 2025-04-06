@@ -32,12 +32,6 @@ public class RegistroProdutos extends javax.swing.JFrame {
         });
     }
 
-    public void setDadosProduto(String nome, String preco, String estoque) {
-        txtNome.setText(nome);
-        txtPreco.setText(preco);
-        txtEstoque.setText(estoque);
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -268,4 +262,11 @@ public class RegistroProdutos extends javax.swing.JFrame {
     private javax.swing.JTextField txtNome;
     private javax.swing.JFormattedTextField txtPreco;
     // End of variables declaration//GEN-END:variables
+
+    public void setDadosProduto(String nome, String preco, String estoque, String acoes) {
+        txtNome.setText(nome);
+        txtPreco.setText(preco);
+        txtEstoque.setText(estoque);
+        txtAcoes.setText(acoes);
+    }
 }
