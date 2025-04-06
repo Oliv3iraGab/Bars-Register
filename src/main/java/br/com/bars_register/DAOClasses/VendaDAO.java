@@ -71,9 +71,6 @@ public class VendaDAO {
         double total = 0.0;
 
         try {
-            java.time.LocalDateTime startOfDay = java.time.LocalDateTime.now().withHour(0).withMinute(0).withSecond(0);
-            java.time.LocalDateTime endOfDay = java.time.LocalDateTime.now().withHour(23).withMinute(59).withSecond(59);
-
             String jpql = "SELECT SUM(v.total) FROM Venda v";
             TypedQuery<Double> query = em.createQuery(jpql, Double.class);
 
