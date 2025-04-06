@@ -27,6 +27,7 @@ public class Usuarios extends javax.swing.JFrame {
         initComponents();
         atualizarTabelaUsuarios();
         editarStatus();;
+        listnerTabela();
     }
     
     /**
@@ -260,5 +261,21 @@ public class Usuarios extends javax.swing.JFrame {
             System.err.println("Erro ao popular tabela: " + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+        /**
+     * Verifica se há uma row selecionada para ativar ou não o botão de excluir
+     */
+    private void listnerTabela() {
+        TblUsuarios.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                int selecionado = TblUsuarios.getSelectedRow();
+                if (selecionado != -1) {
+                    BtnExcluir.setEnabled(true);
+                } else {
+                    BtnExcluir.setEnabled(false);
+                }
+            }
+        });
     }
 }
