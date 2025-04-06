@@ -2,10 +2,15 @@ USE bars_register;
 
 -- Populando a tabela usuarios
 INSERT INTO usuarios (nome, tipo_usuario, email, status, login, senha) VALUES
-('Admin System', 'ADMINISTRADOR', 'admin@barsregister.com', true, 'admin', 'admin123'),
-('João Silva', 'FUNCIONARIO', 'joao.silva@barsregister.com', true, 'joao.silva', 'joao123'),
-('Maria Santos', 'FUNCIONARIO', 'maria.santos@barsregister.com', true, 'maria.santos', 'maria123'),
-('Carlos Oliveira', 'ADMINISTRADOR', 'carlos.oliveira@barsregister.com', true, 'carlos.oliveira', 'carlos123');
+('Admin System', 'ADMINISTRADOR', 'admin@barsregister.com', true, 'admin', '$2a$10$C5PMNVRa5wa2KRLXVJ0or.aIjZwBVfH/r95AbeN6a1t1xy3Xa8MX.'),
+('João Silva', 'FUNCIONARIO', 'jjoao.silva@barsregister.com', true, 'joao.silva', '$2a$10$cSq2kUedioKg8EJWCWdaf.CMb3GohKHLDMWRmuP6EG0w6me8evxI6'),
+('Maria Santos', 'FUNCIONARIO', 'mariasantos@barsregister.com', true, 'maria.santos', '$2a$10$6ApNzV/jlg4IXi8QQ7C8.OTMvlyInmlcWI.cUcO8MY9jcwZuKIwqe'),
+('Carlos Oliveira', 'ADMINISTRADOR', 'carlosoliveira@barsregister.com', true, 'carlos.oliveira', '$2a$10$/cz9xO2wqaBrYtHrDbcRCeaQCEAma4bGvz088sjicfQzOQMtVROa6');
+
+-- 'admin123'
+-- 'joao123'
+-- 'maria123'
+-- 'carlos123'
 
 -- Populando a tabela fornecedores
 INSERT INTO fornecedores (nome, contato, endereco, cnpj) VALUES
