@@ -8,7 +8,6 @@ import br.com.bars_register.persistence.Venda;
 import br.com.bars_register.util.JPAUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
-import br.com.bars_register.persistence.ItemVenda;
 
 public class VendaDAO {
 

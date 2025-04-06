@@ -13,16 +13,11 @@ import br.com.bars_register.persistence.Produto;
 import br.com.bars_register.persistence.Venda;
 import com.formdev.flatlaf.FlatClientProperties;
 import javax.swing.DefaultListModel;
-
-import java.lang.reflect.Array;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.JOptionPane;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 public class Vendas extends javax.swing.JFrame {
