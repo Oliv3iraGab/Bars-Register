@@ -52,8 +52,6 @@ public class RegistroUsuarios extends javax.swing.JFrame {
         BtnView = new javax.swing.JButton();
         txtSenha = new javax.swing.JPasswordField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         PanelFundo.setBackground(new java.awt.Color(255, 255, 255));
         View.standardCornerRadius(PanelFundo);
 

@@ -47,7 +47,6 @@ public class RegistroFornecedores extends javax.swing.JFrame {
         txtEndereco = new javax.swing.JTextField();
         txtContato = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
         PanelMain.setBackground(new java.awt.Color(233, 236, 239));
